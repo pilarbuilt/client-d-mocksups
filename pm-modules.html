@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGC Real Estate — PM Module Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+  <style>
+    /* ── DESIGN TOKENS ────────────────────────────────────── */
+    :root {
+      --agc-blue:        #2986CC;
+      --agc-blue-dark:   #1F6BAF;
+      --agc-blue-light:  #EBF4FB;
+      --agc-dark:        #111827;
+      --agc-text:        #1A1A1A;
+      --agc-muted:       #5C6370;
+      --agc-border:      #E5E7EB;
+      --agc-surface:     #F7F8FA;
+      --agc-white:       #FFFFFF;
+      --agc-amber:       #F59E0B;
+
+      --r-4:   4px;
+      --r-8:   8px;
+      --r-12:  12px;
+
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
+
+      --font: 'Inter', system-ui, sans-serif;
+    }
+
+    /* ── RESET & BASE ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body { font-family: var(--font); color: var(--agc-text); background: var(--agc-white); -webkit-font-smoothing: antialiased; }
+
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: var(--agc-blue); text-decoration: none; }
+
+    /* ── LAYOUT ───────────────────────────────────────────── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .section { padding: 80px 0; }
+    .section--surface { background: var(--agc-surface); }
+    .section--dark { background: var(--agc-dark); }
+
+    /* ── TYPOGRAPHY ───────────────────────────────────────── */
+    .label {
+      display: inline-block;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--agc-blue); margin-bottom: 14px;
+    }
+    .label--white { color: rgba(255,255,255,0.6); }
+
+    .display { font-size: 56px; font-weight: 900; line-height: 1.05; letter-spacing: -1px; }
+    .h1 { font-size: 44px; font-weight: 800; line-height: 1.1; letter-spacing: -0.5px; }
+    .h2 { font-size: 34px; font-weight: 800; line-height: 1.2; letter-spacing: -0.3px; }
+    .h3 { font-size: 22px; font-weight: 700; line-height: 1.3; }
+    .h4 { font-size: 17px; font-weight: 700; line-height: 1.4; }
+    .body-lg { font-size: 18px; line-height: 1.75; color: var(--agc-muted); }
+    .body { font-size: 15px; line-height: 1.7; color: var(--agc-muted); }
+    .small { font-size: 13px; line-height: 1.6; color: var(--agc-muted); }
+
+    /* ── BUTTONS ──────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      height: 48px; padding: 0 24px;
+      font-family: var(--font); font-size: 15px; font-weight: 700;
+      border-radius: var(--r-4); border: none; cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      text-decoration: none; white-space: nowrap;
+    }
+    .btn--primary { background: var(--agc-blue); color: white; }
+    .btn--primary:hover { background: var(--agc-blue-dark); }
+    .btn--ghost { background: transparent; color: var(--agc-blue); border: 1.5px solid var(--agc-blue); }
+    .btn--ghost:hover { background: var(--agc-blue-light); }
+    .btn--ghost-white { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.4); }
+    .btn--ghost-white:hover { background: rgba(255,255,255,0.08); }
+    .btn--lg { height: 54px; padding: 0 30px; font-size: 16px; }
+
+    /* ── FORM ELEMENTS ────────────────────────────────────── */
+    .form-group { margin-bottom: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    label { display: block; font-size: 12px; font-weight: 700; color: #444; margin-bottom: 6px; letter-spacing: 0.3px; }
+    input, textarea, select {
+      width: 100%; height: 48px; padding: 0 14px;
+      border: 1px solid var(--agc-border); border-radius: var(--r-4);
+      font-family: var(--font); font-size: 15px; color: var(--agc-text);
+      background: var(--agc-surface);
+      transition: border-color 0.15s, background 0.15s;
+    }
+    textarea { height: auto; padding: 12px 14px; resize: vertical; }
+    input:focus, textarea:focus, select:focus {
+      outline: none; border-color: var(--agc-blue);
+      background: var(--agc-white);
+      box-shadow: 0 0 0 3px var(--agc-blue-light);
+    }
+    select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235C6370' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+
+    /* ── CARDS ────────────────────────────────────────────── */
+    .card {
+      background: var(--agc-white); border: 1px solid var(--agc-border);
+      border-radius: var(--r-8); padding: 32px;
+      transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: var(--shadow-hover); }
+    .card--surface { background: var(--agc-surface); border-color: transparent; }
+    .card--dark { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.08); }
+
+    /* ── STARS ────────────────────────────────────────────── */
+    .stars { color: var(--agc-amber); font-size: 15px; letter-spacing: 2px; }
+
+    /* ── SECTION DIVIDERS ─────────────────────────────────── */
+    .section-rule {
+      border: none; border-top: 1px solid var(--agc-border);
+      margin: 0;
+    }
+
+    /* ── MODULE LABELS (for the library only) ─────────────── */
+    .module-tag {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px; background: #1e293b; color: #94a3b8;
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; border-left: 3px solid var(--agc-blue);
+    }
+    .module-tag strong { color: white; }
+
+    /* ═══════════════════════════════════════════════════════
+       MODULE 1 — PM HERO
+    ══════════════════════════════════════════════════════════ */
+    .pm-hero {
+      background: var(--agc-dark);
+      display: grid; grid-template-columns: 1fr 460px;
+      min-height: 560px;
+    }
+    .pm-hero__left {
+      padding: 80px 64px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .pm-hero__headline {
+      font-size: 52px; font-weight: 900; line-height: 1.07;
+      letter-spacing: -1px; color: white;
+      margin-bottom: 20px;
+    }
+    .pm-hero__sub {
+      font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.65);
+      max-width: 420px; margin-bottom: 36px;
+    }
+    .pm-hero__ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .pm-hero__trust {
+      margin-top: 40px; padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex; gap: 28px; flex-wrap: wrap;
+    }
+    .pm-hero__trust-item {
+      font-size: 13px; color: rgba(255,255,255,0.55);
+    }
+    .pm-hero__trust-item strong { color: rgba(255,255,255,0.9); display: block; font-size: 15px; margin-bottom: 2px; }
+    .pm-hero__right {
+      position: relative; background: #0d1520;
+      overflow: hidden; display: flex; align-items: flex-end;
+    }
+    .pm-hero__agent-photo {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center;
+      opacity: 0.92;
+    }
+    .pm-hero__agent-label {
+      position: absolute; bottom: 20px; left: 20px;
+      background: rgba(0,0,0,0.65); backdrop-filter: blur(6px);
+      color: white; padding: 8px 14px; border-radius: var(--r-4);
+    }
+    .pm-hero__agent-label strong { display: block; font-size: 14px; }
+    .pm-hero__agent-label span { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+    /* ═══════════════════════════════════════════════════════
+       MODULE 2 — TRUST STRIP
+    ══════════════════════════════════════════════════════════ */
+    .trust-strip {
+      background: var(--agc-blue);
+      padding: 0;
+    }
+    .trust-strip__inner {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    .trust-item {
+      padding: 28px 32px;
+      border-right: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-item__icon {
+      font-size: 22px; flex-shrink: 0; margin-top: 2px;
+    }
+    .trust-item__stat {
+      font-size: 26px; font-weight: 900; color: white;
+      line-height: 1; margin-bottom: 4px;
+    }
+    .trust-item__label { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.4; }
+
+    /* ═══════════════════════════════════════════════════════
+       MODULE 3 — WHY AGC
+    ══════════════════════════════════════════════════════════ */
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: start;
+    }
+    .why-left { }
+    .why-right { display: flex; flex-direction: column; gap: 32px; }
+    .why-point { display: flex; gap: 20px; align-items: flex-start; }
+    .why-point__num {
+      flex-shrink: 0; width: 36px; height: 36px;
+      background: var(--agc-blue-light); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800; color: var(--agc-blue);
+    }
+    .why-point__content h4 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+    .why-point__content p { font-size: 15px; color: var(--agc-muted); line-height: 1.65; }
+    .why-proof {
+      margin-top: 32px; padding: 24px; border-radius: var(--r-8);
+      background: var(--agc-surface); border: 1px solid var(--agc-border);
+    }
+    .why-proof__quote { font-size: 16px; color: var(--agc-text); line-height: 1.65; font-style: italic; margin-bottom: 12px; }
+    .why-proof__cite { font-size: 13px; font-weight: 700; color: var(--agc-muted); }
+
+    /* ═══════════════════════════════════════════════════════
+       MODULE 4 — SERVICE INCLUSIONS
+    ══════════════════════════════════════════════════════════ */
+    .inclusions-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .inclusion-card {
+      background: var(--agc-white); border: 1px solid var(--agc-border);
+      border-radius: var(--r-8); padding: 28px 28px 24px;
+    }
+    .inclusion-card__icon {
+      width: 40px; height: 40px; border-radius: var(--r-8);
+      background: var(--agc-blue-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; margin-bottom: 16px;
+    }
+    .inclusion-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .inclusion-card p { font-size: 14px; color: var(--agc-muted); line-height: 1.65; }
+
+    .checklist { list-style: none; }
+    .checklist li {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 15px; color: var(--agc-text); padding: 10px 0;
+      border-bottom: 1px solid var(--agc-border);
+      line-height: 1.5;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before {
+      content: '✓'; flex-shrink: 0;
+      color: var(--agc-blue); font-weight: 800; font-size: 14px; margin-top: 1px;
+    }
+
+    .inclusions-two-col {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       MODULE 5 — SUBURB COVERAGE
+    ══════════════════════════════════════════════════════════ */
+    .suburb-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+    }
+    .suburb-list { display: flex; flex-direction: column; gap: 12px; }
+    .suburb-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 20px; background: var(--agc-white);
+      border: 1px solid var(--agc-border); border-radius: var(--r-8);
+    }
+    .suburb-item__name { font-size: 16px; font-weight: 700; }
+    .suburb-item__postcode { font-size: 13px; color: var(--agc-muted); }
+    .suburb-item__stats { text-align: right; }
+    .suburb-item__median { font-size: 15px; font-weight: 700; color: var(--agc-blue); }
+    .suburb-item__label { font-size: 11px; color: var(--agc-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .suburb-map-placeholder {
+      background: #e8eef4; border-radius: var(--r-12);
+      min-height: 420px; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: #999; text-align: center; padding: 24px;
+      border: 1px solid var(--agc-border); position: relative; overflow: hidden;
+    }
+    .suburb-map-placeholder svg { opacity: 0.15; position: absolute; inset: 0; width: 100%; height: 100%; }
+    .suburb-coverage-note {
+      margin-top: 20px; padding: 16px 20px;
+      background: var(--agc-blue-light); border-radius: var(--r-8);
+      border-left: 3px solid var(--agc-blue);
+      font-size: 14px; color: var(--agc-text); line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       MODULE 6 — TESTIMONIALS
+    ══════════════════════════════════════════════════════════ */
+    .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .review-card {
+      background: var(--agc-dark); border-radius: var(--r-8);
+      padding: 28px; display: flex; flex-direction: column;
+    }
+    .review-card .stars { margin-bottom: 16px; }
+    .review-card blockquote {
+      font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.88);
+      font-style: italic; margin-bottom: 20px; flex: 1;
+    }
+    .review-card cite {
+      font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.5);
+      font-style: normal;
+    }
+    .review-source {
+      display: flex; align-items: center; gap: 6px;
+      margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.3);
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .review-source::before { content: ''; display: block; width: 16px; height: 1px; background: rgba(255,255,255,0.2); }
+
+    /* ═══════════════════════════════════════════════════════
+       MODULE 7 — FAQ
+    ══════════════════════════════════════════════════════════ */
+    .faq-layout { display: grid; grid-template-columns: 280px 1fr; gap: 64px; align-items: start; }
+    .faq-sidebar h3 { font-size: 22px; font-weight: 800; margin-bottom: 12px; }
+    .faq-sidebar p { font-size: 15px; color: var(--agc-muted); line-height: 1.65; margin-bottom: 24px; }
+    .faq-list { }
+    .faq-item {
+      border-bottom: 1px solid var(--agc-border); padding: 20px 0;
+    }
+    .faq-item:first-child { border-top: 1px solid var(--agc-border); }
+    .faq-q {
+      font-size: 16px; font-weight: 700; margin-bottom: 10px;
+      cursor: default;
+    }
+    .faq-a { font-size: 15px; color: var(--agc-muted); line-height: 1.75; }
+
+    /* ═══════════════════════════════════════════════════════
+       MODULE 8 — SHORT LEAD FORM
+    ══════════════════════════════════════════════════════════ */
+    .lead-form-wrap {
+      display: grid; grid-template-columns: 1fr 480px; gap: 64px;
+      align-items: start;
+    }
+    .lead-form-left h2 { margin-bottom: 16px; }
+    .lead-form-left p { font-size: 17px; color: var(--agc-muted); line-height: 1.75; margin-bottom: 28px; }
+    .lead-form-trust { display: flex; flex-direction: column; gap: 12px; }
+    .lead-form-trust-item {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; color: var(--agc-text); font-weight: 600;
+    }
+    .lead-form-trust-item::before {
+      content: '✓'; flex-shrink: 0;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--agc-blue-light); color: var(--agc-blue);
+      font-size: 12px; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lead-form-card {
+      background: var(--agc-white); border: 1px solid var(--agc-border);
+      border-radius: var(--r-12); padding: 36px;
+    }
+    .lead-form-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+    .lead-form-card p { font-size: 14px; color: var(--agc-muted); margin-bottom: 24px; }
+    .form-submit { width: 100%; }
+    .form-privacy { font-size: 12px; color: var(--agc-muted); text-align: center; margin-top: 12px; line-height: 1.5; }
+
+    /* ═══════════════════════════════════════════════════════
+       MODULE 9 — CROSS-SELL PANEL
+    ══════════════════════════════════════════════════════════ */
+    .xsell-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--agc-border); border-radius: var(--r-12); overflow: hidden; }
+    .xsell-panel {
+      background: var(--agc-white); padding: 40px 36px;
+      display: flex; flex-direction: column;
+    }
+    .xsell-panel--primary { background: var(--agc-blue-light); }
+    .xsell-panel__badge {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      background: var(--agc-blue); color: white;
+      padding: 3px 10px; border-radius: 20px;
+      margin-bottom: 20px; width: fit-content;
+    }
+    .xsell-panel__badge--muted { background: var(--agc-border); color: var(--agc-muted); }
+    .xsell-panel h3 { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+    .xsell-panel p { font-size: 15px; color: var(--agc-muted); line-height: 1.65; margin-bottom: 24px; flex: 1; }
+    .xsell-panel ul { list-style: none; margin-bottom: 28px; display: flex; flex-direction: column; gap: 8px; }
+    .xsell-panel ul li { font-size: 14px; color: var(--agc-text); display: flex; gap: 8px; align-items: center; }
+    .xsell-panel ul li::before { content: '→'; color: var(--agc-blue); font-weight: 700; flex-shrink: 0; }
+
+    /* ── LIBRARY CHROME (demo scaffolding only) ──────────── */
+    .lib-header {
+      background: #0f172a; color: white;
+      padding: 40px; border-bottom: 1px solid #1e293b;
+    }
+    .lib-header h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+    .lib-header p { font-size: 15px; color: #64748b; }
+    .lib-tokens { padding: 40px; background: #0f172a; }
+    .lib-tokens h2 { font-size: 18px; font-weight: 700; color: white; margin-bottom: 24px; }
+    .token-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .token-chip {
+      display: flex; align-items: center; gap: 10px;
+      background: #1e293b; border-radius: var(--r-4);
+      padding: 8px 14px;
+    }
+    .token-swatch { width: 20px; height: 20px; border-radius: 3px; flex-shrink: 0; }
+    .token-name { font-size: 12px; font-weight: 700; color: #94a3b8; }
+    .token-hex { font-size: 12px; color: #475569; margin-left: 4px; }
+
+  </style>
+</head>
+<body>
+
+<!-- ── LIBRARY HEADER ──────────────────────────────────────── -->
+<div class="lib-header">
+  <h1>AGC Real Estate — PM Module Library</h1>
+  <p>Conversion-first property management design system for MultiArray RealEstateManager2. Nine reusable page modules.</p>
+</div>
+
+<div class="lib-tokens">
+  <h2>Design Tokens</h2>
+  <div class="token-row">
+    <div class="token-chip"><div class="token-swatch" style="background:#2986CC;"></div><span class="token-name">--agc-blue</span><span class="token-hex">#2986CC</span></div>
+    <div class="token-chip"><div class="token-swatch" style="background:#1F6BAF;"></div><span class="token-name">--agc-blue-dark</span><span class="token-hex">#1F6BAF</span></div>
+    <div class="token-chip"><div class="token-swatch" style="background:#EBF4FB;border:1px solid #2986CC22;"></div><span class="token-name">--agc-blue-light</span><span class="token-hex">#EBF4FB</span></div>
+    <div class="token-chip"><div class="token-swatch" style="background:#111827;"></div><span class="token-name">--agc-dark</span><span class="token-hex">#111827</span></div>
+    <div class="token-chip"><div class="token-swatch" style="background:#1A1A1A;"></div><span class="token-name">--agc-text</span><span class="token-hex">#1A1A1A</span></div>
+    <div class="token-chip"><div class="token-swatch" style="background:#5C6370;"></div><span class="token-name">--agc-muted</span><span class="token-hex">#5C6370</span></div>
+    <div class="token-chip"><div class="token-swatch" style="background:#E5E7EB;border:1px solid #ccc;"></div><span class="token-name">--agc-border</span><span class="token-hex">#E5E7EB</span></div>
+    <div class="token-chip"><div class="token-swatch" style="background:#F7F8FA;border:1px solid #ccc;"></div><span class="token-name">--agc-surface</span><span class="token-hex">#F7F8FA</span></div>
+    <div class="token-chip"><div class="token-swatch" style="background:#F59E0B;"></div><span class="token-name">--agc-amber</span><span class="token-hex">#F59E0B</span></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     MODULE 1 — PM HERO WITH CTA
+     Position: Top of every PM page. Above the fold.
+     MultiArray: Hero block with image slot + two text fields + dual CTA
+══════════════════════════════════════════════════════════════ -->
+<div class="module-tag"><strong>MODULE 01</strong> &nbsp;PM Hero with CTA &nbsp;·&nbsp; Above fold, every PM page</div>
+
+<section class="pm-hero">
+  <div class="pm-hero__left">
+    <div class="label label--white">Property Management — Waterloo, Inner Sydney</div>
+    <h1 class="pm-hero__headline">Managing your<br>investment.<br>Not just listing it.</h1>
+    <p class="pm-hero__sub">
+      AGC has managed investment properties in Waterloo and inner Sydney since 2014.
+      Two directors. Every property managed personally. No hand-offs.
+    </p>
+    <div class="pm-hero__ctas">
+      <a href="#form" class="btn btn--primary btn--lg">Get a fee quote →</a>
+      <a href="tel:0294131183" class="btn btn--ghost-white btn--lg">📞 Call Gwilym</a>
+    </div>
+    <div class="pm-hero__trust">
+      <div class="pm-hero__trust-item">
+        <strong>Since 2014</strong>
+        Waterloo specialists
+      </div>
+      <div class="pm-hero__trust-item">
+        <strong>24 hrs</strong>
+        Guaranteed callback
+      </div>
+      <div class="pm-hero__trust-item">
+        <strong>Cantonese · Mandarin · English</strong>
+        Bilingual service
+      </div>
+      <div class="pm-hero__trust-item">
+        <strong>Lic. 10064170</strong>
+        NSW licensed
+      </div>
+    </div>
+  </div>
+  <div class="pm-hero__right">
+    <img class="pm-hero__agent-photo"
+         src="gwilym.png"
+         alt="Gwilym Chan — AGC Real Estate"
+         onerror="this.style.background='#1a2535';this.style.minHeight='400px'">
+    <div class="pm-hero__agent-label">
+      <strong>Gwilym Chan</strong>
+      <span>Co-Founder &amp; Director</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     MODULE 2 — TRUST STRIP
+     Position: Immediately below hero. First section after fold.
+     MultiArray: Stats block, 4 editable stat fields
+══════════════════════════════════════════════════════════════ -->
+<div class="module-tag"><strong>MODULE 02</strong> &nbsp;Trust Strip &nbsp;·&nbsp; Immediately below hero, within first 2 sections</div>
+
+<div class="trust-strip">
+  <div class="trust-strip__inner container" style="padding:0 40px;">
+    <div class="trust-item" style="padding-left:0;">
+      <div class="trust-item__icon">🏠</div>
+      <div>
+        <div class="trust-item__stat">50+</div>
+        <div class="trust-item__label">Properties managed<br>across inner Sydney</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-item__icon">📍</div>
+      <div>
+        <div class="trust-item__stat">10 yrs</div>
+        <div class="trust-item__label">Waterloo 2017<br>suburb specialists</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-item__icon">⚡</div>
+      <div>
+        <div class="trust-item__stat">24 hrs</div>
+        <div class="trust-item__label">Response time<br>guaranteed</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-item__icon">📞</div>
+      <div>
+        <div class="trust-item__stat">1 call</div>
+        <div class="trust-item__label">You speak to a director,<br>every time</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     MODULE 3 — WHY AGC / VALUE PROPOSITION
+     Position: Third section. After trust strip.
+     MultiArray: Two-column content block, 4 point fields + pull quote
+══════════════════════════════════════════════════════════════ -->
+<div class="module-tag"><strong>MODULE 03</strong> &nbsp;Why AGC — Value Proposition &nbsp;·&nbsp; Third section</div>
+
+<section class="section">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-left">
+        <div class="label">Why AGC</div>
+        <h2 class="h2" style="margin-bottom:20px;">A boutique agency runs differently.<br>Here's how.</h2>
+        <p class="body-lg">
+          Most investors change property managers because nobody picks up the phone.
+          AGC was built to fix that. When you call, Gwilym answers. When something
+          needs attention, Alan handles it. No call centres. No juniors managing your asset.
+        </p>
+        <div class="why-proof" style="margin-top:32px;">
+          <p class="why-proof__quote">"I own three properties. Gwilym manages all of them. Hasn't dropped the ball once."</p>
+          <div class="why-proof__cite">— Multi-property investor, Alexandria</div>
+        </div>
+        <div style="margin-top:28px; display:flex; gap:12px;">
+          <a href="#form" class="btn btn--primary">Enquire about management</a>
+          <a href="/about" class="btn btn--ghost">Meet the team</a>
+        </div>
+      </div>
+      <div class="why-right">
+        <div class="why-point">
+          <div class="why-point__num">1</div>
+          <div class="why-point__content">
+            <h4>Personal management, not delegation</h4>
+            <p>Gwilym and Alan manage every property directly. Your investment is never handed to a junior PM or a call centre. Two people. Full accountability.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point__num">2</div>
+          <div class="why-point__content">
+            <h4>Suburb knowledge you can't fake</h4>
+            <p>Over ten years of managing properties in Waterloo and surrounds means genuine market intelligence — rent positioning, tenant quality, building-by-building vacancy insight.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point__num">3</div>
+          <div class="why-point__content">
+            <h4>Specialist investor network</h4>
+            <p>AGC clients get introductions to specialist brokers and solicitors — including AP Lending (finance + law + RE licence combined). Free initial consults, no referral fees.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point__num">4</div>
+          <div class="why-point__content">
+            <h4>Cantonese, Mandarin, English</h4>
+            <p>Waterloo's 2017 postcode is 16% Mandarin-speaking. Gwilym and Alan work in all three languages — a practical advantage no competitor currently offers in this area.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-rule">
+
+<!-- ══════════════════════════════════════════════════════════
+     MODULE 4 — SERVICE INCLUSIONS / LANDLORD OUTCOMES
+     Position: Mid-page. After value prop.
+     MultiArray: Feature grid block, icon + title + description per card
+══════════════════════════════════════════════════════════════ -->
+<div class="module-tag"><strong>MODULE 04</strong> &nbsp;Service Inclusions &nbsp;·&nbsp; Mid-page, after value proposition</div>
+
+<section class="section section--surface">
+  <div class="container">
+    <div class="label">What's included</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:48px;">
+      <div>
+        <h2 class="h2">Everything included.<br>Nothing hidden.</h2>
+      </div>
+      <div style="display:flex; align-items:flex-end;">
+        <p class="body-lg">Property management at AGC covers every stage — from tenant sourcing to lease end. Here's what your management fee includes.</p>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;">
+      <div>
+        <ul class="checklist">
+          <li>Tenant sourcing — advertised on Domain, realestate.com.au, and AGC's own network</li>
+          <li>Reference and background checks on all applicants</li>
+          <li>Lease preparation and signing</li>
+          <li>Inbound/outbound condition reports with photos</li>
+          <li>Routine inspections (quarterly, with written reports)</li>
+          <li>Rent collection and disbursements to your nominated account</li>
+          <li>Arrears management — chased immediately, not after 14 days</li>
+          <li>Maintenance coordination with vetted local trades</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="checklist">
+          <li>Lease renewals negotiated at market rate</li>
+          <li>Rent review recommendations based on live suburb data</li>
+          <li>NCAT representation when required</li>
+          <li>Annual financial statements for tax purposes</li>
+          <li>CoverWise specialist landlord insurance (year one covered for new clients)</li>
+          <li>Introduction to AP Lending — finance, legal, and RE licence combined</li>
+          <li>Direct contact with your managing director — not a ticket system</li>
+          <li>Bilingual service — Cantonese, Mandarin, English</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:48px; border-top:1px solid var(--agc-border); padding-top:40px;">
+      <div class="label">Outcome data</div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-top:8px;">
+        <div class="card" style="text-align:center; padding:24px;">
+          <div style="font-size:36px; font-weight:900; color:var(--agc-blue); margin-bottom:6px;">9 days</div>
+          <div class="small">Average days to place a quality tenant</div>
+        </div>
+        <div class="card" style="text-align:center; padding:24px;">
+          <div style="font-size:36px; font-weight:900; color:var(--agc-blue); margin-bottom:6px;">&lt;2%</div>
+          <div class="small">Vacancy rate across managed portfolio</div>
+        </div>
+        <div class="card" style="text-align:center; padding:24px;">
+          <div style="font-size:36px; font-weight:900; color:var(--agc-blue); margin-bottom:6px;">100%</div>
+          <div class="small">Of calls answered or returned within 24 hrs</div>
+        </div>
+        <div class="card" style="text-align:center; padding:24px;">
+          <div style="font-size:36px; font-weight:900; color:var(--agc-blue); margin-bottom:6px;">$0</div>
+          <div class="small">Hidden fees — all costs disclosed upfront</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     MODULE 5 — SUBURB COVERAGE
+     Position: Mid-page or lower. Answers "do you cover my area?"
+     MultiArray: Table or card list block with editable suburb rows
+══════════════════════════════════════════════════════════════ -->
+<div class="module-tag"><strong>MODULE 05</strong> &nbsp;Suburb Coverage &nbsp;·&nbsp; Answers "do you cover my suburb?"</div>
+
+<section class="section">
+  <div class="container">
+    <div class="suburb-grid">
+      <div>
+        <div class="label">Coverage area</div>
+        <h2 class="h2" style="margin-bottom:16px;">Inner Sydney,<br>managed locally.</h2>
+        <p class="body" style="margin-bottom:32px;">
+          AGC's core management area spans the 2017 postcode and surrounding inner-city suburbs.
+          We don't take properties we can't manage well. If you're unsure whether we cover your suburb, call us.
+        </p>
+        <div class="suburb-list">
+          <div class="suburb-item">
+            <div><div class="suburb-item__name">Waterloo</div><div class="suburb-item__postcode">NSW 2017</div></div>
+            <div class="suburb-item__stats"><div class="suburb-item__median">$620/wk</div><div class="suburb-item__label">Median rent</div></div>
+          </div>
+          <div class="suburb-item">
+            <div><div class="suburb-item__name">Redfern</div><div class="suburb-item__postcode">NSW 2016</div></div>
+            <div class="suburb-item__stats"><div class="suburb-item__median">$595/wk</div><div class="suburb-item__label">Median rent</div></div>
+          </div>
+          <div class="suburb-item">
+            <div><div class="suburb-item__name">Surry Hills</div><div class="suburb-item__postcode">NSW 2010</div></div>
+            <div class="suburb-item__stats"><div class="suburb-item__median">$680/wk</div><div class="suburb-item__label">Median rent</div></div>
+          </div>
+          <div class="suburb-item">
+            <div><div class="suburb-item__name">Zetland</div><div class="suburb-item__postcode">NSW 2017</div></div>
+            <div class="suburb-item__stats"><div class="suburb-item__median">$640/wk</div><div class="suburb-item__label">Median rent</div></div>
+          </div>
+          <div class="suburb-item">
+            <div><div class="suburb-item__name">Alexandria</div><div class="suburb-item__postcode">NSW 2015</div></div>
+            <div class="suburb-item__stats"><div class="suburb-item__median">$605/wk</div><div class="suburb-item__label">Median rent</div></div>
+          </div>
+          <div class="suburb-item">
+            <div><div class="suburb-item__name">Mascot</div><div class="suburb-item__postcode">NSW 2020</div></div>
+            <div class="suburb-item__stats"><div class="suburb-item__median">$590/wk</div><div class="suburb-item__label">Median rent</div></div>
+          </div>
+        </div>
+        <div class="suburb-coverage-note">
+          Not listed above? AGC also manages properties across broader inner-city Sydney.
+          <a href="tel:0294131183" style="font-weight:700; color:var(--agc-blue);">Call to confirm your suburb →</a>
+        </div>
+      </div>
+      <div>
+        <div class="suburb-map-placeholder">
+          <div style="position:relative;z-index:1;">
+            <div style="font-size:32px; margin-bottom:12px;">📍</div>
+            <div style="font-weight:700; color:#1a1a1a; margin-bottom:6px;">Interactive Suburb Map</div>
+            <div style="font-size:13px; color:#999;">Embed Google Maps or MultiArray suburb map here.<br>Centre: Waterloo 2017. Radius: ~5km.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-rule">
+
+<!-- ══════════════════════════════════════════════════════════
+     MODULE 6 — TESTIMONIALS / REVIEWS
+     Position: Before FAQ. Converts hesitant landlords.
+     MultiArray: Review card block, 3 cards, each with quote/cite/source
+══════════════════════════════════════════════════════════════ -->
+<div class="module-tag"><strong>MODULE 06</strong> &nbsp;Testimonials &nbsp;·&nbsp; Must appear before FAQ</div>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="label label--white">What landlords say</div>
+    <h2 class="h2" style="color:white; margin-bottom:12px;">Investors who've been with AGC for years.</h2>
+    <p class="body" style="color:rgba(255,255,255,0.55); margin-bottom:40px; max-width:560px;">Real feedback from property investors across Waterloo and inner Sydney. Not stock testimonials.</p>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Gwilym picked up the phone every time. Every time. That doesn't sound like much until you've had an agent who doesn't."</blockquote>
+        <cite>— Waterloo landlord, managed since 2021</cite>
+        <div class="review-source">Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Found a quality tenant in 9 days. My previous agent took six weeks and placed someone who didn't last. The difference in how they handle applications is obvious."</blockquote>
+        <cite>— Zetland investor, 2BR apartment</cite>
+        <div class="review-source">RateMyAgent</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"I own three properties. Gwilym manages all of them. He hasn't dropped the ball once in four years. That's what you pay a property manager for."</blockquote>
+        <cite>— Multi-property investor, Alexandria</cite>
+        <div class="review-source">Google Review</div>
+      </div>
+    </div>
+    <div style="margin-top:40px; text-align:center;">
+      <a href="https://www.ratemyagent.com.au" class="btn btn--ghost-white" target="_blank" rel="noopener">See all reviews on RateMyAgent →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     MODULE 7 — FAQ
+     Position: After testimonials, before form.
+     MultiArray: Accordion or static FAQ block, editable Q&A pairs
+══════════════════════════════════════════════════════════════ -->
+<div class="module-tag"><strong>MODULE 07</strong> &nbsp;FAQ &nbsp;·&nbsp; After testimonials, before lead form</div>
+
+<section class="section">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="faq-sidebar">
+        <div class="label">FAQ</div>
+        <h3>Common landlord questions.</h3>
+        <p>Answered plainly. If your question isn't here, call Gwilym directly.</p>
+        <a href="tel:0294131183" class="btn btn--primary" style="margin-top:8px;">📞 02 9413 1183</a>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">How much does property management cost?</div>
+          <div class="faq-a">AGC's management fee is competitive with the inner-Sydney market. We charge a flat percentage of rent collected — no hidden fees, no "statement fees", no inspection add-ons. We'll give you a fee quote in writing within 24 hours of enquiry.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">How do I switch from my current property manager?</div>
+          <div class="faq-a">The process takes 30–60 days depending on your existing agreement. AGC handles the full transition — notice to your current agent, document handover, and tenant communication. You don't manage the switch; we do.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Who actually manages my property day-to-day?</div>
+          <div class="faq-a">Gwilym Chan manages the residential portfolio. Alan Chan handles commercial properties and administration. Your property is never handed to a junior PM or managed by someone you haven't met. The directors are your point of contact.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">How quickly do you find tenants?</div>
+          <div class="faq-a">AGC's average is 9 days to place a quality tenant across the current portfolio. We advertise on Domain and realestate.com.au, plus our existing network of qualified applicants from previous vacancies in the area.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Do you manage properties outside Waterloo?</div>
+          <div class="faq-a">Yes. Our core area covers Waterloo, Redfern, Surry Hills, Zetland, Alexandria, and Mascot. We also manage properties across broader inner-city Sydney. Call to confirm your suburb — if we can't manage it well, we'll say so.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Can you speak Cantonese or Mandarin?</div>
+          <div class="faq-a">Yes. Both Gwilym and Alan are fluent in Cantonese and Mandarin as well as English. If you prefer to discuss your property in either language, just let us know when you call.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-rule">
+
+<!-- ══════════════════════════════════════════════════════════
+     MODULE 8 — SHORT LEAD FORM
+     Position: Near bottom of PM page. Also used as inline CTA.
+     MultiArray: Lead capture form block. 5 fields max.
+══════════════════════════════════════════════════════════════ -->
+<div class="module-tag"><strong>MODULE 08</strong> &nbsp;Short Lead Form &nbsp;·&nbsp; Near bottom of PM page. Max 5 fields.</div>
+
+<section class="section section--surface" id="form">
+  <div class="container">
+    <div class="lead-form-wrap">
+      <div class="lead-form-left">
+        <div class="label">Get started</div>
+        <h2 class="h2" style="margin-bottom:16px;">Get a management fee quote. Takes 60 seconds.</h2>
+        <p class="body-lg">
+          Fill in your property details and Gwilym will call you within 24 hours
+          with a written fee schedule — no obligation, no sales call.
+        </p>
+        <div class="lead-form-trust" style="margin-top:28px;">
+          <div class="lead-form-trust-item">Gwilym calls you — not a call centre</div>
+          <div class="lead-form-trust-item">Written fee quote within 24 hours</div>
+          <div class="lead-form-trust-item">No lock-in commitment to enquire</div>
+          <div class="lead-form-trust-item">First year of landlord insurance covered for new clients</div>
+        </div>
+
+        <div style="margin-top:36px; padding:20px 24px; background:white; border:1px solid var(--agc-border); border-radius:var(--r-8); display:flex; align-items:center; gap:16px;">
+          <img src="gwilym.png" alt="Gwilym Chan" style="width:52px; height:52px; border-radius:50%; object-fit:cover; object-position:top; flex-shrink:0;" onerror="this.style.background='#2986CC';this.style.display='flex'">
+          <div>
+            <div style="font-size:15px; font-weight:700;">Gwilym Chan</div>
+            <div style="font-size:13px; color:var(--agc-muted);">Co-Founder &amp; Director — AGC Real Estate</div>
+            <div style="font-size:13px; color:var(--agc-blue); font-weight:600; margin-top:2px;">📞 02 9413 1183</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="lead-form-card">
+          <h3>Property management enquiry</h3>
+          <p>For Waterloo, Redfern, Surry Hills, Zetland, Alexandria, Mascot and surrounds.</p>
+          <div class="form-row">
+            <div><label>First name *</label><input type="text" placeholder="Your first name"></div>
+            <div><label>Last name *</label><input type="text" placeholder="Your last name"></div>
+          </div>
+          <div class="form-group"><label>Phone *</label><input type="tel" placeholder="0400 000 000"></div>
+          <div class="form-group"><label>Email *</label><input type="email" placeholder="you@email.com"></div>
+          <div class="form-group"><label>Property address *</label><input type="text" placeholder="42 Smith St, Waterloo NSW 2017"></div>
+          <div class="form-group">
+            <label>Anything we should know? (optional)</label>
+            <textarea rows="2" placeholder="e.g. currently with an agent, lease ends in June…"></textarea>
+          </div>
+          <button class="btn btn--primary btn--lg form-submit">Send enquiry →</button>
+          <p class="form-privacy">Your details are used to contact you about this enquiry only. No spam. AGC Real Estate — Lic. 10064170.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     MODULE 9 — CROSS-SELL PANEL
+     Position: Bottom of PM page, or on any landing page.
+     MultiArray: Three-column panel block with badge + title + list + CTA
+══════════════════════════════════════════════════════════════ -->
+<div class="module-tag"><strong>MODULE 09</strong> &nbsp;Cross-sell Panel &nbsp;·&nbsp; Connects PM, Sales, and Appraisal journeys</div>
+
+<section class="section">
+  <div class="container">
+    <div class="label">AGC services</div>
+    <h2 class="h2" style="margin-bottom:8px;">Property management and sales,<br>under one roof.</h2>
+    <p class="body" style="margin-bottom:40px; max-width:540px;">Whether you're managing, selling, or ready for a rental appraisal — AGC handles it directly. No referrals, no third parties.</p>
+
+    <div class="xsell-grid">
+      <div class="xsell-panel xsell-panel--primary">
+        <div class="xsell-panel__badge">Current page</div>
+        <h3>Property Management</h3>
+        <p>Personal management of your Waterloo or inner-Sydney investment. Gwilym manages the portfolio. Your call is always answered.</p>
+        <ul>
+          <li>Tenant sourcing and vetting</li>
+          <li>Lease and compliance management</li>
+          <li>24-hour guaranteed response</li>
+          <li>Year one landlord insurance covered</li>
+        </ul>
+        <a href="#form" class="btn btn--primary">Get a fee quote →</a>
+      </div>
+
+      <div class="xsell-panel">
+        <div class="xsell-panel__badge xsell-panel__badge--muted">Also available</div>
+        <h3>Sales</h3>
+        <p>Thinking of selling your investment property? AGC handles the sale directly. We know the Waterloo market — days on market, recent comparable results, and buyer depth.</p>
+        <ul>
+          <li>Waterloo and inner Sydney sales</li>
+          <li>Appraisal within 48 hours</li>
+          <li>Managed transition from PM to sale</li>
+          <li>Bilingual marketing — Chinese investor audience</li>
+        </ul>
+        <a href="/sell" class="btn btn--ghost">Request a sales appraisal →</a>
+      </div>
+
+      <div class="xsell-panel">
+        <div class="xsell-panel__badge xsell-panel__badge--muted">Free service</div>
+        <h3>Rental Appraisal</h3>
+        <p>Not sure what your property should rent for? AGC provides written rental appraisals for Waterloo and surrounds — free, with no obligation to list with us.</p>
+        <ul>
+          <li>Written appraisal within 24 hours</li>
+          <li>Suburb-specific rental data</li>
+          <li>Includes current vacancy rate and demand</li>
+          <li>No sales pitch attached</li>
+        </ul>
+        <a href="/appraisal" class="btn btn--ghost">Get a free appraisal →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SITE FOOTER (reference) ─────────────────────────────── -->
+<footer style="background:#111827; color:#9ca3af; padding:40px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid #1f2937;">
+  <div>
+    <img src="https://agcrealestate.com.au/site_images/logo" alt="AGC Real Estate" style="height:28px;width:auto;filter:brightness(0) invert(1);opacity:0.8;margin-bottom:8px;" onerror="this.style.display='none'">
+    <div style="font-size:12px;">Lic. 10064170 &nbsp;·&nbsp; Shop 264/8 Lachlan St, Waterloo NSW 2017 &nbsp;·&nbsp; agcre.com.au</div>
+  </div>
+  <div style="text-align:right; font-size:14px;">
+    <div style="font-weight:700; color:white;">02 9413 1183</div>
+    <div style="margin-top:4px;">info@agcrealestate.com.au</div>
+  </div>
+</footer>
+
+</body>
+</html>

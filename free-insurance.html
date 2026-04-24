@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landlord Insurance, On AGC — Year One, Covered.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+  <style>
+    :root {
+      --agc-blue:       #2986CC;
+      --agc-blue-dark:  #1F6BAF;
+      --agc-blue-light: #EBF4FB;
+      --agc-dark:       #111827;
+      --agc-text:       #1A1A1A;
+      --agc-muted:      #5C6370;
+      --agc-border:     #E5E7EB;
+      --agc-surface:    #F7F8FA;
+      --agc-white:      #FFFFFF;
+      --agc-amber:      #F59E0B;
+      --r-4: 4px; --r-8: 8px; --r-12: 12px;
+      --font: 'Inter', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); color: var(--agc-text); background: var(--agc-white); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .section { padding: 80px 0; }
+    .section--surface { background: var(--agc-surface); }
+    .section--dark { background: var(--agc-dark); }
+
+    .label {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--agc-blue); margin-bottom: 14px;
+    }
+    .label--white { color: rgba(255,255,255,0.5); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      height: 48px; padding: 0 22px; border-radius: var(--r-4);
+      font-family: var(--font); font-size: 15px; font-weight: 700;
+      border: none; cursor: pointer; white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn--primary { background: var(--agc-blue); color: white; }
+    .btn--primary:hover { background: var(--agc-blue-dark); color: white; }
+    .btn--ghost-white { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.35); }
+    .btn--ghost-white:hover { background: rgba(255,255,255,0.08); }
+
+    .mockup-label {
+      background: var(--agc-blue); color: white; font-size: 10px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 12px;
+      position: fixed; top: 0; right: 0; z-index: 999; border-bottom-left-radius: 6px;
+    }
+
+    /* ── NAV — MINIMAL ────────────────────────────────────── */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 72px; background: var(--agc-white);
+      border-bottom: 1px solid var(--agc-border);
+    }
+    .nav-logo img { height: 52px; width: auto; }
+    .nav-back { font-size: 13px; color: var(--agc-muted); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .nav-phone { font-size: 14px; font-weight: 700; color: var(--agc-text); }
+
+    /* ── HERO — 3 COLUMN ──────────────────────────────────── */
+    .hero {
+      background: var(--agc-dark);
+      display: grid;
+      grid-template-columns: minmax(0,1fr) 220px 440px;
+      min-height: 620px;
+    }
+
+    /* Left — offer text */
+    .hero-text {
+      padding: 72px 56px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .hero-promo-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(41,134,204,0.18); border: 1px solid rgba(41,134,204,0.35);
+      border-radius: 20px; padding: 5px 14px; width: fit-content; margin-bottom: 28px;
+    }
+    .hero-promo-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--agc-blue); flex-shrink: 0; }
+    .hero-promo-badge span { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+    .hero-headline {
+      font-size: 52px; font-weight: 900; line-height: 1.06;
+      letter-spacing: -1.5px; color: white; margin-bottom: 8px;
+    }
+    .hero-accent { font-size: 21px; font-weight: 700; color: var(--agc-blue); margin-bottom: 22px; }
+    .hero-body { font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.62); margin-bottom: 10px; }
+    .hero-suburbs { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 32px; line-height: 1.6; }
+    .hero-cw-badge {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 8px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--r-8); padding: 10px 16px; width: fit-content;
+    }
+    .cw-check {
+      width: 22px; height: 22px; border-radius: 50%; background: rgba(41,134,204,0.25);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--agc-blue); font-size: 12px; font-weight: 900; flex-shrink: 0;
+    }
+    .hero-cw-badge .cw-text { font-size: 13px; color: rgba(255,255,255,0.75); }
+    .hero-cw-badge strong { color: white; }
+    .hero-trust-row {
+      display: flex; gap: 20px; flex-wrap: wrap; margin-top: 32px;
+      padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-trust-item { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.5; }
+    .hero-trust-item strong { display: block; color: rgba(255,255,255,0.85); font-size: 14px; margin-bottom: 2px; }
+
+    /* Middle — Gwilym photo */
+    .hero-photo-col {
+      position: relative; overflow: hidden; background: #0d1520;
+      border-left: 2px solid rgba(255,255,255,0.04);
+    }
+    .hero-photo-col img {
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      height: 100%; width: auto; object-fit: cover; object-position: top;
+      opacity: 0.92;
+    }
+    .hero-photo-label {
+      position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+      white-space: nowrap; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px);
+      color: white; font-size: 11px; font-weight: 700; padding: 5px 10px;
+      border-radius: var(--r-4); text-align: center;
+    }
+    .hero-photo-label span { display: block; color: rgba(255,255,255,0.55); font-weight: 400; font-size: 10px; margin-top: 1px; }
+
+    /* Right — form card */
+    .hero-form-col {
+      background: var(--agc-white);
+      padding: 36px 32px;
+      display: flex; flex-direction: column; justify-content: center;
+      overflow-y: auto;
+    }
+    .hero-form-col h2 { font-size: 20px; font-weight: 800; color: var(--agc-text); margin-bottom: 6px; }
+    .hero-form-col .form-sub { font-size: 13px; color: var(--agc-muted); line-height: 1.55; margin-bottom: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+    .form-group { margin-bottom: 12px; }
+    label { display: block; font-size: 11px; font-weight: 700; color: #444; margin-bottom: 4px; letter-spacing: 0.2px; }
+    input, textarea, select {
+      width: 100%; height: 44px; padding: 0 12px;
+      border: 1px solid var(--agc-border); border-radius: var(--r-4);
+      font-family: var(--font); font-size: 14px; color: var(--agc-text);
+      background: var(--agc-surface); transition: border-color 0.15s, background 0.15s;
+    }
+    textarea { height: auto; padding: 10px 12px; resize: none; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--agc-blue); background: white; box-shadow: 0 0 0 3px var(--agc-blue-light); }
+    select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235C6370' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+
+    .radio-group { display: flex; gap: 8px; }
+    .radio-opt {
+      flex: 1; border: 1px solid var(--agc-border); border-radius: var(--r-4);
+      padding: 9px 8px; text-align: center; cursor: pointer;
+      font-size: 13px; font-weight: 600; color: var(--agc-muted);
+      transition: all 0.15s;
+    }
+    .radio-opt.selected { border-color: var(--agc-blue); background: var(--agc-blue-light); color: var(--agc-blue); }
+
+    .form-submit-btn {
+      width: 100%; height: 50px; background: var(--agc-blue); color: white;
+      border: none; border-radius: var(--r-4); font-family: var(--font);
+      font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 4px;
+    }
+    .form-submit-btn:hover { background: var(--agc-blue-dark); }
+    .form-privacy { font-size: 11px; color: var(--agc-muted); text-align: center; margin-top: 10px; line-height: 1.55; }
+
+    /* ── WHAT'S INCLUDED ──────────────────────────────────── */
+    .cards-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .inc-card {
+      background: var(--agc-white); border: 1px solid var(--agc-border);
+      border-radius: var(--r-8); padding: 28px;
+    }
+    .inc-card-icon {
+      width: 40px; height: 40px; border-radius: var(--r-8);
+      background: var(--agc-blue-light); display: flex; align-items: center;
+      justify-content: center; font-size: 18px; margin-bottom: 16px;
+    }
+    .inc-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .inc-card p { font-size: 14px; color: var(--agc-muted); line-height: 1.7; }
+    .inc-card .value-tag {
+      display: inline-block; margin-top: 14px;
+      background: var(--agc-blue-light); color: var(--agc-blue);
+      font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px;
+    }
+
+    /* ── HOW IT WORKS ─────────────────────────────────────── */
+    .steps-row { display: grid; grid-template-columns: repeat(3,1fr); position: relative; }
+    .steps-row::before {
+      content: ''; position: absolute; top: 24px; left: calc(16.67% + 16px); right: calc(16.67% + 16px);
+      height: 1px; background: var(--agc-border);
+    }
+    .step { padding: 0 32px; text-align: center; }
+    .step-num {
+      width: 48px; height: 48px; background: var(--agc-blue); border-radius: 50%;
+      color: white; font-size: 18px; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; position: relative; z-index: 1;
+    }
+    .step h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+    .step p { font-size: 14px; color: var(--agc-muted); line-height: 1.7; }
+
+    /* ── TESTIMONIALS ─────────────────────────────────────── */
+    .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .review-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--r-8); padding: 28px; display: flex; flex-direction: column; }
+    .stars { color: var(--agc-amber); font-size: 14px; letter-spacing: 2px; margin-bottom: 16px; }
+    .review-card blockquote { font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.88); font-style: italic; flex: 1; margin-bottom: 18px; }
+    .review-card cite { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.4); font-style: normal; }
+    .review-source { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 10px; color: rgba(255,255,255,0.28); text-transform: uppercase; letter-spacing: 1px; }
+    .review-source::before { content:''; display:block; width:14px; height:1px; background:rgba(255,255,255,0.2); }
+
+    /* ── FAQ ──────────────────────────────────────────────── */
+    .faq-layout { display: grid; grid-template-columns: 260px 1fr; gap: 64px; align-items: start; }
+    .faq-sidebar h3 { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+    .faq-sidebar p { font-size: 15px; color: var(--agc-muted); line-height: 1.65; margin-bottom: 22px; }
+    .faq-item { border-bottom: 1px solid var(--agc-border); padding: 18px 0; }
+    .faq-item:first-child { border-top: 1px solid var(--agc-border); }
+    .faq-q { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .faq-a { font-size: 14px; color: var(--agc-muted); line-height: 1.75; }
+
+    /* ── FOOTER CTA ───────────────────────────────────────── */
+    .footer-cta {
+      background: var(--agc-blue); padding: 52px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-cta h2 { font-size: 24px; font-weight: 800; color: white; max-width: 480px; }
+    .footer-cta p { color: rgba(255,255,255,0.75); font-size: 15px; margin-top: 6px; }
+    .footer-contact { text-align: right; color: white; }
+    .footer-contact .phone { font-size: 22px; font-weight: 800; }
+    .footer-contact .email { font-size: 13px; opacity: 0.75; margin-top: 4px; }
+    .footer-contact .addr { font-size: 12px; opacity: 0.55; margin-top: 3px; }
+
+    /* ── FOOTER ───────────────────────────────────────────── */
+    footer { background: #0d1520; padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo img { height: 24px; filter: brightness(0) invert(1); opacity: 0.7; }
+    .footer-lic { font-size: 11px; color: #475569; margin-top: 6px; }
+    .footer-copy { font-size: 12px; color: #475569; }
+  </style>
+</head>
+<body>
+
+<div class="mockup-label">LANDING PAGE MOCKUP</div>
+
+<!-- NAV — MINIMAL, NO DISTRACTIONS ON CAMPAIGN PAGE -->
+<nav>
+  <div class="nav-logo">
+    <img src="https://agcrealestate.com.au/site_images/logo" alt="AGC Real Estate"
+         onerror="this.outerHTML='<span style=&quot;font-size:16px;font-weight:900;color:#1A1A1A;&quot;>AGC Real Estate</span>'">
+  </div>
+  <a href="index.html" class="nav-back">← Back to AGC Real Estate</a>
+  <a href="tel:0294131183" class="nav-phone">📞 02 9413 1183</a>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════
+     HERO — 3 COLUMNS: OFFER TEXT | GWILYM | FORM
+══════════════════════════════════════════════════════ -->
+<section class="hero">
+
+  <!-- Column 1: Offer text -->
+  <div class="hero-text">
+    <div class="hero-promo-badge">
+      <div class="dot"></div>
+      <span>Property Management Offer</span>
+    </div>
+    <h1 class="hero-headline">Landlord Insurance,<br>On AGC.</h1>
+    <div class="hero-accent">Year One, Covered.</div>
+    <p class="hero-body">
+      Switch your property management to AGC and we cover your first year
+      of specialist landlord insurance. Not your bank's policy — a specialist
+      insurer with no loopholes. Value: ~$500–600.
+    </p>
+    <p class="hero-suburbs">
+      Waterloo · Redfern · Surry Hills · Zetland · Alexandria · Mascot
+    </p>
+    <div class="hero-cw-badge">
+      <div class="cw-check">✓</div>
+      <div class="cw-text">Insurance backed by <strong>CoverWise</strong> — specialist landlord insurers, not banks</div>
+    </div>
+    <div class="hero-trust-row">
+      <div class="hero-trust-item"><strong>Since 2014</strong>Waterloo specialists</div>
+      <div class="hero-trust-item"><strong>24 hrs</strong>Gwilym calls you</div>
+      <div class="hero-trust-item"><strong>Lic. 10064170</strong>NSW licensed</div>
+    </div>
+  </div>
+
+  <!-- Column 2: Gwilym photo -->
+  <div class="hero-photo-col">
+    <img src="gwilym.png" alt="Gwilym Chan — AGC Real Estate"
+         onerror="this.style.display='none'">
+    <div class="hero-photo-label">
+      Gwilym Chan
+      <span>Co-Founder &amp; Director</span>
+    </div>
+  </div>
+
+  <!-- Column 3: 7-field form -->
+  <div class="hero-form-col">
+    <h2>Claim your coverage</h2>
+    <p class="form-sub">Investment properties in Waterloo, Redfern, Surry Hills, Zetland, Alexandria, Mascot and surrounds.</p>
+
+    <div class="form-row">
+      <div><label>First name *</label><input type="text" placeholder="Gwilym"></div>
+      <div><label>Last name *</label><input type="text" placeholder="Chan"></div>
+    </div>
+    <div class="form-group"><label>Phone number *</label><input type="tel" placeholder="0400 000 000"></div>
+    <div class="form-group"><label>Email address *</label><input type="email" placeholder="you@email.com"></div>
+    <div class="form-group"><label>Investment property address *</label><input type="text" placeholder="42 Smith St, Waterloo NSW 2017"></div>
+    <div class="form-group">
+      <label>Currently with a property manager? *</label>
+      <div class="radio-group">
+        <div class="radio-opt selected">Yes</div>
+        <div class="radio-opt">No</div>
+        <div class="radio-opt">Self-managing</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Anything else we should know? (optional)</label>
+      <textarea rows="2" placeholder="e.g. lease ends in June, two properties, specific concerns…"></textarea>
+    </div>
+
+    <button class="form-submit-btn">Claim My Coverage →</button>
+    <p class="form-privacy">Your details are used to contact you about this offer only. No spam. No third parties. AGC Real Estate — Lic. 10064170.</p>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     WHAT'S INCLUDED
+══════════════════════════════════════════════════════ -->
+<section class="section section--surface">
+  <div class="container">
+    <div class="label">What's included</div>
+    <h2 style="font-size:34px;font-weight:800;line-height:1.2;margin-bottom:10px;">Not a brochure. An actual policy.</h2>
+    <p style="font-size:17px;color:var(--agc-muted);line-height:1.75;margin-bottom:44px;max-width:560px;">Here's what AGC covers when you switch your property management to us.</p>
+    <div class="cards-3">
+      <div class="inc-card">
+        <div class="inc-card-icon">🛡️</div>
+        <h3>Specialist landlord insurance</h3>
+        <p>Through CoverWise — a specialist landlord insurer, not your bank. We cover your first 12 months from day one of management.</p>
+        <div class="value-tag">Value: ~$500–600</div>
+      </div>
+      <div class="inc-card">
+        <div class="inc-card-icon">⚠️</div>
+        <h3>No bank policy loopholes</h3>
+        <p>Bank policies require police confirmation that tenant damage was malicious — police can only confirm damage exists. Specialist insurers dropped that clause. You're actually covered.</p>
+      </div>
+      <div class="inc-card">
+        <div class="inc-card-icon">🤝</div>
+        <h3>The investor network</h3>
+        <p>AGC clients get free initial consults with specialist brokers and solicitors — including AP Lending, who hold a combined finance, legal, and real estate licence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     HOW IT WORKS
+══════════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:52px;">
+      <div class="label">The process</div>
+      <h2 style="font-size:34px;font-weight:800;margin-bottom:8px;">Three steps. No admin.</h2>
+      <p style="font-size:17px;color:var(--agc-muted);">Fill in the form. Gwilym does the rest.</p>
+    </div>
+    <div class="steps-row">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Fill in your details</h3>
+        <p>Takes 60 seconds. Property address, contact details, and your current management situation — that's it.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Gwilym calls you</h3>
+        <p>Within 24 hours. Not a call centre. Not a junior PM. Gwilym will walk you through how the offer works and whether it's a fit.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>We handle the switch</h3>
+        <p>If it's a fit, AGC manages the full transition from your current agent. Your insurance starts from day one of management.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════════════════════ -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="label label--white">What landlords say</div>
+    <h2 style="font-size:32px;font-weight:800;color:white;margin-bottom:10px;">Landlords we manage in inner Sydney.</h2>
+    <p style="font-size:16px;color:rgba(255,255,255,0.5);margin-bottom:36px;max-width:520px;">Real feedback. Not structural placeholders — replace with verified Google or RateMyAgent reviews before publishing.</p>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Gwilym picked up the phone every time. Every time. That doesn't sound like much until you've had an agent who doesn't."</blockquote>
+        <cite>— Waterloo landlord, managed since 2021</cite>
+        <div class="review-source">Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Found a quality tenant in 9 days. My previous agent took six weeks. The difference in how they handle applications is obvious."</blockquote>
+        <cite>— Zetland investor, 2BR apartment</cite>
+        <div class="review-source">RateMyAgent</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"I own three properties. Gwilym manages all of them. Hasn't dropped the ball once in four years."</blockquote>
+        <cite>— Multi-property investor, Alexandria</cite>
+        <div class="review-source">Google Review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     FAQ
+══════════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="faq-sidebar">
+        <div class="label">FAQ</div>
+        <h3>Common questions, answered plainly.</h3>
+        <p>If your question isn't here, call Gwilym directly — he'll give you a straight answer.</p>
+        <a href="tel:0294131183" class="btn btn--primary" style="margin-top:4px;">📞 02 9413 1183</a>
+      </div>
+      <div>
+        <div class="faq-item">
+          <div class="faq-q">What's the catch?</div>
+          <div class="faq-a">No catch. AGC offers this to new property management clients to demonstrate how we operate. If you don't switch, you owe us nothing. The offer stands on its own.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Do I have to leave my current agent?</div>
+          <div class="faq-a">Yes — this offer applies to properties that AGC manages. The switch typically takes 30–60 days depending on your existing agreement. We handle the full transition — notice to your current agent, document handover, and tenant communication.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Which insurer does AGC use?</div>
+          <div class="faq-a">CoverWise — a specialist landlord insurer, not a bank add-on policy. We've reviewed their policy terms. No malicious-damage loophole, no requirement to prove intent. You're actually covered.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Which suburbs do you cover?</div>
+          <div class="faq-a">Our core area is Waterloo, Redfern, Surry Hills, Zetland, Alexandria, and Mascot. We also manage properties across broader inner-city Sydney. Call to confirm your suburb — if we can't manage it well, we'll say so.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What happens after the first year?</div>
+          <div class="faq-a">The policy renews at market rate. We'll walk you through your options at renewal time. You're never locked in to the policy or to AGC.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Can you speak Cantonese or Mandarin?</div>
+          <div class="faq-a">Yes. Gwilym and Alan are both fluent in Cantonese and Mandarin as well as English. If you'd prefer to discuss your property in either language, just let us know when you call.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     FOOTER CTA
+══════════════════════════════════════════════════════ -->
+<div class="footer-cta">
+  <div>
+    <h2>Ready to talk? Fill in the form above — Gwilym calls within 24 hours.</h2>
+    <p>Or skip the form and call directly.</p>
+  </div>
+  <div class="footer-contact">
+    <div class="phone">02 9413 1183</div>
+    <div class="email">info@agcrealestate.com.au</div>
+    <div class="addr">Shop 264/8 Lachlan St, Waterloo NSW 2017</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">
+      <img src="https://agcrealestate.com.au/site_images/logo" alt="AGC Real Estate"
+           onerror="this.outerHTML='<span style=&quot;color:white;font-size:14px;font-weight:700;&quot;>AGC Real Estate</span>'">
+    </div>
+    <div class="footer-lic">Lic. 10064170 · agcre.com.au</div>
+  </div>
+  <div class="footer-copy">© 2026 AGC Real Estate. All rights reserved.</div>
+</footer>
+
+</body>
+</html>

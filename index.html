@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGC Real Estate — Waterloo, Inner Sydney</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+  <style>
+    :root {
+      --agc-blue:       #2986CC;
+      --agc-blue-dark:  #1F6BAF;
+      --agc-blue-light: #EBF4FB;
+      --agc-dark:       #111827;
+      --agc-text:       #1A1A1A;
+      --agc-muted:      #5C6370;
+      --agc-border:     #E5E7EB;
+      --agc-surface:    #F7F8FA;
+      --agc-white:      #FFFFFF;
+      --agc-amber:      #F59E0B;
+      --r-4: 4px; --r-8: 8px; --r-12: 12px;
+      --font: 'Inter', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); color: var(--agc-text); background: var(--agc-white); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .section { padding: 80px 0; }
+    .section--surface { background: var(--agc-surface); }
+    .section--dark { background: var(--agc-dark); }
+
+    .label {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--agc-blue); margin-bottom: 14px;
+    }
+    .label--white { color: rgba(255,255,255,0.5); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      height: 48px; padding: 0 22px; border-radius: var(--r-4);
+      font-family: var(--font); font-size: 15px; font-weight: 700;
+      border: none; cursor: pointer; white-space: nowrap;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .btn--primary { background: var(--agc-blue); color: white; }
+    .btn--primary:hover { background: var(--agc-blue-dark); color: white; }
+    .btn--ghost { background: transparent; color: var(--agc-blue); border: 1.5px solid var(--agc-blue); }
+    .btn--ghost:hover { background: var(--agc-blue-light); }
+    .btn--ghost-white { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.35); }
+    .btn--ghost-white:hover { background: rgba(255,255,255,0.08); }
+    .btn--lg { height: 52px; padding: 0 28px; font-size: 16px; }
+
+    .mockup-label {
+      background: var(--agc-blue); color: white; font-size: 10px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 12px;
+      position: fixed; top: 0; right: 0; z-index: 999; border-bottom-left-radius: 6px;
+    }
+
+    /* NAV */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 72px; background: var(--agc-white);
+      border-bottom: 1px solid var(--agc-border);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo img { height: 52px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-links a {
+      font-size: 14px; font-weight: 600; color: var(--agc-muted);
+      padding: 6px 14px; border-radius: var(--r-4);
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-links a:hover { color: var(--agc-text); background: var(--agc-surface); }
+    .nav-divider { width: 1px; height: 16px; background: var(--agc-border); margin: 0 6px; }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-phone { font-size: 14px; font-weight: 700; color: var(--agc-text); }
+    .nav-cta {
+      font-size: 14px; font-weight: 700; color: var(--agc-blue);
+      border: 1.5px solid var(--agc-blue); padding: 7px 16px;
+      border-radius: var(--r-4); transition: background 0.15s;
+    }
+    .nav-cta:hover { background: var(--agc-blue-light); }
+
+    /* HERO */
+    .hero { background: var(--agc-dark); display: grid; grid-template-columns: 52% 48%; min-height: 580px; }
+    .hero-left { padding: 72px 64px; display: flex; flex-direction: column; justify-content: center; }
+    .hero-promo-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(41,134,204,0.18); border: 1px solid rgba(41,134,204,0.35);
+      border-radius: 20px; padding: 5px 14px; width: fit-content; margin-bottom: 28px;
+    }
+    .hero-promo-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--agc-blue); flex-shrink: 0; }
+    .hero-promo-badge span { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+    .hero-headline { font-size: 54px; font-weight: 900; line-height: 1.06; letter-spacing: -1.5px; color: white; margin-bottom: 8px; }
+    .hero-accent { font-size: 22px; font-weight: 700; color: var(--agc-blue); margin-bottom: 22px; }
+    .hero-body { font-size: 16px; line-height: 1.75; color: rgba(255,255,255,0.62); max-width: 440px; margin-bottom: 36px; }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-footnote { margin-top: 36px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 28px; flex-wrap: wrap; }
+    .hero-footnote-item { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.5; }
+    .hero-footnote-item strong { display: block; color: rgba(255,255,255,0.85); font-size: 14px; margin-bottom: 2px; }
+
+    .hero-right { position: relative; display: grid; grid-template-rows: 55% 45%; grid-template-columns: 1fr 1fr; overflow: hidden; }
+    .hero-stat-card {
+      position: absolute; top: 24px; right: 24px; z-index: 10;
+      background: white; border-radius: var(--r-8); padding: 14px 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    }
+    .hero-stat-card .stat { font-size: 28px; font-weight: 900; color: var(--agc-blue); line-height: 1; }
+    .hero-stat-card .stat-label { font-size: 12px; color: var(--agc-muted); margin-top: 4px; line-height: 1.4; }
+    .hero-photo-gwilym { grid-row: 1/3; grid-column: 1/2; position: relative; overflow: hidden; background: #0d1520; }
+    .hero-photo-gwilym img { width: 100%; height: 100%; object-fit: cover; object-position: top center; opacity: 0.93; }
+    .hero-photo-gwilym .photo-label {
+      position: absolute; bottom: 16px; left: 16px;
+      background: rgba(0,0,0,0.65); backdrop-filter: blur(4px);
+      color: white; padding: 7px 12px; border-radius: var(--r-4);
+    }
+    .hero-photo-gwilym .photo-label strong { display: block; font-size: 13px; }
+    .hero-photo-gwilym .photo-label span { font-size: 11px; color: rgba(255,255,255,0.6); }
+    .hero-photo-1 { grid-row: 1/2; grid-column: 2/3; overflow: hidden; border-left: 2px solid var(--agc-dark); border-bottom: 2px solid var(--agc-dark); }
+    .hero-photo-2 { grid-row: 2/3; grid-column: 2/3; overflow: hidden; border-left: 2px solid var(--agc-dark); }
+    .hero-photo-1 img, .hero-photo-2 img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* TRUST STRIP */
+    .trust-strip { background: var(--agc-blue); }
+    .trust-strip-inner { display: grid; grid-template-columns: repeat(4,1fr); }
+    .trust-item { padding: 24px 32px; border-right: 1px solid rgba(255,255,255,0.15); display: flex; align-items: flex-start; gap: 14px; }
+    .trust-item:last-child { border-right: none; }
+    .trust-item-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .trust-item-stat { font-size: 24px; font-weight: 900; color: white; line-height: 1; margin-bottom: 4px; }
+    .trust-item-label { font-size: 12px; color: rgba(255,255,255,0.72); line-height: 1.45; }
+
+    /* SERVICES */
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; border: 1px solid var(--agc-border); border-radius: var(--r-12); overflow: hidden; }
+    .service-panel { padding: 40px 36px; border-right: 1px solid var(--agc-border); display: flex; flex-direction: column; transition: background 0.2s; }
+    .service-panel:last-child { border-right: none; }
+    .service-panel:hover { background: var(--agc-surface); }
+    .service-panel--primary { background: var(--agc-blue-light); }
+    .service-panel--primary:hover { background: #dceefa; }
+    .service-icon { font-size: 28px; margin-bottom: 20px; }
+    .service-panel h3 { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+    .service-panel p { font-size: 15px; color: var(--agc-muted); line-height: 1.7; margin-bottom: 24px; flex: 1; }
+    .service-link { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--agc-blue); }
+
+    /* LISTINGS */
+    .listings-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; }
+    .listings-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .listing-card { background: var(--agc-white); border: 1px solid var(--agc-border); border-radius: var(--r-8); overflow: hidden; transition: box-shadow 0.2s; }
+    .listing-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .listing-photo { height: 200px; overflow: hidden; position: relative; background: var(--agc-surface); }
+    .listing-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .listing-badge { position: absolute; top: 14px; left: 14px; background: var(--agc-blue); color: white; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; padding: 4px 10px; border-radius: 20px; }
+    .listing-body { padding: 22px 24px; }
+    .listing-price { font-size: 20px; font-weight: 900; color: var(--agc-text); margin-bottom: 4px; }
+    .listing-address { font-size: 14px; color: var(--agc-muted); margin-bottom: 16px; }
+    .listing-specs { display: flex; gap: 16px; font-size: 13px; color: var(--agc-muted); font-weight: 600; }
+
+    /* WHY AGC */
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .why-points { display: flex; flex-direction: column; gap: 28px; }
+    .why-point { display: flex; gap: 18px; align-items: flex-start; }
+    .why-num { flex-shrink: 0; width: 34px; height: 34px; background: var(--agc-blue-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--agc-blue); }
+    .why-point h4 { font-size: 16px; font-weight: 700; margin-bottom: 5px; }
+    .why-point p { font-size: 14px; color: var(--agc-muted); line-height: 1.65; }
+    .why-visual { position: relative; border-radius: var(--r-12); overflow: hidden; background: var(--agc-dark); min-height: 420px; display: flex; flex-direction: column; justify-content: flex-end; }
+    .why-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; opacity: 0.65; }
+    .why-visual-overlay { position: relative; z-index: 1; padding: 32px 36px; background: linear-gradient(to top, rgba(17,24,39,0.95), transparent); }
+    .why-visual-quote { font-size: 16px; color: white; line-height: 1.65; font-style: italic; margin-bottom: 12px; }
+    .why-visual-cite { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.5); }
+
+    /* TESTIMONIALS */
+    .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .review-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--r-8); padding: 28px; display: flex; flex-direction: column; }
+    .stars { color: var(--agc-amber); font-size: 14px; letter-spacing: 2px; margin-bottom: 16px; }
+    .review-card blockquote { font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.88); font-style: italic; flex: 1; margin-bottom: 18px; }
+    .review-card cite { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.4); font-style: normal; }
+    .review-source { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 10px; color: rgba(255,255,255,0.28); text-transform: uppercase; letter-spacing: 1px; }
+    .review-source::before { content:''; display:block; width:14px; height:1px; background:rgba(255,255,255,0.2); }
+
+    /* FORM */
+    .form-strip { display: grid; grid-template-columns: 1fr 480px; gap: 64px; align-items: start; }
+    .form-strip-left h2 { font-size: 34px; font-weight: 800; line-height: 1.2; margin-bottom: 14px; }
+    .form-strip-left p { font-size: 16px; color: var(--agc-muted); line-height: 1.75; margin-bottom: 28px; }
+    .form-trust-items { display: flex; flex-direction: column; gap: 10px; }
+    .form-trust-item { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--agc-text); }
+    .form-trust-item::before { content:'✓'; flex-shrink:0; width:20px; height:20px; border-radius:50%; background:var(--agc-blue-light); color:var(--agc-blue); font-size:11px; font-weight:900; display:flex; align-items:center; justify-content:center; }
+    .form-card { background: var(--agc-white); border: 1px solid var(--agc-border); border-radius: var(--r-12); padding: 36px; }
+    .form-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 5px; }
+    .form-card .form-sub { font-size: 13px; color: var(--agc-muted); margin-bottom: 22px; }
+    .form-group { margin-bottom: 14px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+    label { display: block; font-size: 12px; font-weight: 700; color: #444; margin-bottom: 5px; }
+    input, textarea, select { width: 100%; height: 46px; padding: 0 14px; border: 1px solid var(--agc-border); border-radius: var(--r-4); font-family: var(--font); font-size: 14px; color: var(--agc-text); background: var(--agc-surface); transition: border-color 0.15s, background 0.15s; }
+    input:focus, select:focus { outline: none; border-color: var(--agc-blue); background: white; box-shadow: 0 0 0 3px var(--agc-blue-light); }
+    select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235C6370' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+    .form-submit { width: 100%; height: 50px; background: var(--agc-blue); color: white; border: none; border-radius: var(--r-4); font-family: var(--font); font-size: 16px; font-weight: 700; cursor: pointer; }
+    .form-submit:hover { background: var(--agc-blue-dark); }
+    .form-privacy { font-size: 11px; color: var(--agc-muted); text-align: center; margin-top: 10px; line-height: 1.55; }
+
+    /* FOOTER CTA */
+    .footer-cta { background: var(--agc-blue); padding: 56px 40px; display: flex; align-items: center; justify-content: space-between; }
+    .footer-cta h2 { font-size: 26px; font-weight: 800; color: white; max-width: 480px; }
+    .footer-cta p { color: rgba(255,255,255,0.75); font-size: 15px; margin-top: 6px; }
+    .footer-contact { text-align: right; color: white; }
+    .footer-contact .phone { font-size: 22px; font-weight: 800; }
+    .footer-contact .email { font-size: 14px; opacity: 0.75; margin-top: 4px; }
+    .footer-contact .addr { font-size: 13px; opacity: 0.6; margin-top: 3px; }
+
+    /* FOOTER */
+    footer { background: #0d1520; padding: 40px; display: flex; justify-content: space-between; align-items: center; }
+    footer .footer-logo img { height: 26px; width: auto; filter: brightness(0) invert(1); opacity: 0.75; }
+    footer .lic { font-size: 11px; color: #475569; margin-top: 6px; }
+    footer .footer-links { display: flex; gap: 20px; }
+    footer .footer-links a { font-size: 13px; color: #64748b; }
+    footer .footer-links a:hover { color: #94a3b8; }
+  </style>
+</head>
+<body>
+
+<div class="mockup-label">HOMEPAGE MOCKUP</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="https://agcrealestate.com.au/site_images/logo" alt="AGC Real Estate"
+         onerror="this.outerHTML='<span style=&quot;font-size:16px;font-weight:900;color:#1A1A1A;&quot;>AGC Real Estate</span>'">
+  </div>
+  <div class="nav-links">
+    <a href="/buy">Buying</a>
+    <div class="nav-divider"></div>
+    <a href="/sell">Selling</a>
+    <div class="nav-divider"></div>
+    <a href="/rent">Renting</a>
+    <div class="nav-divider"></div>
+    <a href="/about">About</a>
+  </div>
+  <div class="nav-right">
+    <a href="tel:0294131183" class="nav-phone">02 9413 1183</a>
+    <a href="/property-management" class="nav-cta">Property Management</a>
+  </div>
+</nav>
+
+<!-- HERO — LANDLORD INSURANCE PROMOTION -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-promo-badge">
+      <div class="dot"></div>
+      <span>Current Offer &nbsp;·&nbsp; Property Management</span>
+    </div>
+    <h1 class="hero-headline">Landlord Insurance,<br>On AGC.</h1>
+    <div class="hero-accent">Year One, Covered.</div>
+    <p class="hero-body">
+      Switch your property management to AGC and we cover your first year
+      of specialist landlord insurance — not a bank policy, a specialist insurer
+      with no loopholes. Gwilym calls you within 24 hours.
+    </p>
+    <div class="hero-ctas">
+      <a href="free-insurance.html" class="btn btn--primary btn--lg">Claim your coverage →</a>
+      <a href="tel:0294131183" class="btn btn--ghost-white btn--lg">📞 Call Gwilym</a>
+    </div>
+    <div class="hero-footnote">
+      <div class="hero-footnote-item"><strong>Since 2014</strong>Waterloo specialists</div>
+      <div class="hero-footnote-item"><strong>24-hour</strong>Guaranteed callback</div>
+      <div class="hero-footnote-item"><strong>Cantonese · Mandarin · English</strong></div>
+      <div class="hero-footnote-item"><strong>Lic. 10064170</strong>NSW licensed</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-card">
+      <div class="stat">50+</div>
+      <div class="stat-label">Properties managed<br>inner Sydney</div>
+    </div>
+    <div class="hero-photo-gwilym">
+      <img src="gwilym.png" alt="Gwilym Chan — AGC Real Estate"
+           onerror="this.style.background='#1a2535'">
+      <div class="photo-label">
+        <strong>Gwilym Chan</strong>
+        <span>Co-Founder &amp; Director</span>
+      </div>
+    </div>
+    <!-- Unsplash: free to use under Unsplash licence -->
+    <div class="hero-photo-1">
+      <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80&fit=crop&auto=format"
+           alt="Modern apartment interior — inner Sydney">
+    </div>
+    <div class="hero-photo-2">
+      <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80&fit=crop&auto=format"
+           alt="Inner-city apartment building — Waterloo">
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-strip-inner container" style="padding:0 40px;">
+    <div class="trust-item" style="padding-left:0;">
+      <div class="trust-item-icon">🏠</div>
+      <div><div class="trust-item-stat">50+</div><div class="trust-item-label">Properties managed<br>across inner Sydney</div></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-item-icon">📍</div>
+      <div><div class="trust-item-stat">10 yrs</div><div class="trust-item-label">Waterloo 2017<br>suburb specialists</div></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-item-icon">⚡</div>
+      <div><div class="trust-item-stat">24 hrs</div><div class="trust-item-label">Guaranteed callback,<br>every time</div></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-item-icon">📞</div>
+      <div><div class="trust-item-stat">1 call</div><div class="trust-item-label">You reach a director,<br>not a call centre</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES — BUYING · SELLING · RENTING -->
+<section class="section">
+  <div class="container">
+    <div style="margin-bottom:36px;">
+      <div class="label">How we can help</div>
+      <h2 style="font-size:34px;font-weight:800;line-height:1.2;max-width:580px;">
+        Property management, sales, and rentals — all managed personally.
+      </h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-panel service-panel--primary">
+        <div class="service-icon">🏡</div>
+        <h3>Managing your investment</h3>
+        <p>Personal property management for Waterloo, Redfern, Surry Hills, Zetland, Alexandria, and Mascot. Gwilym manages every property directly — no junior PMs, no hand-offs.</p>
+        <a href="/property-management" class="service-link">Learn about PM →</a>
+      </div>
+      <div class="service-panel">
+        <div class="service-icon">🔑</div>
+        <h3>Buying in inner Sydney</h3>
+        <p>AGC helps buyers find and secure residential and commercial properties across inner-city Sydney. Local market knowledge built over a decade of transacting in the area.</p>
+        <a href="/buy" class="service-link">View available properties →</a>
+      </div>
+      <div class="service-panel">
+        <div class="service-icon">📊</div>
+        <h3>Selling your property</h3>
+        <p>Waterloo and inner Sydney sales — from appraisal to settlement. Bilingual marketing that reaches the Chinese-Australian investor audience no other local agency is targeting.</p>
+        <a href="/sell" class="service-link">Request a sales appraisal →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED LISTINGS -->
+<section class="section section--surface" style="padding-top:64px;padding-bottom:64px;">
+  <div class="container">
+    <div class="listings-header">
+      <div>
+        <div class="label">Current listings</div>
+        <h2 style="font-size:28px;font-weight:800;">Properties available now.</h2>
+      </div>
+      <a href="/listings" class="btn btn--ghost">View all listings →</a>
+    </div>
+    <div class="listings-grid">
+      <div class="listing-card">
+        <div class="listing-photo">
+          <!-- Unsplash licence — free for commercial use -->
+          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80&fit=crop&auto=format" alt="2-bedroom apartment interior">
+          <div class="listing-badge">For Lease</div>
+        </div>
+        <div class="listing-body">
+          <div class="listing-price">$650 / week</div>
+          <div class="listing-address">42 Smith Street, Waterloo NSW 2017</div>
+          <div class="listing-specs">
+            <span>🛏 2 bed</span>
+            <span>🚿 1 bath</span>
+            <span>🚗 1 car</span>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-photo">
+          <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80&fit=crop&auto=format" alt="2-bedroom apartment living room">
+          <div class="listing-badge">For Sale</div>
+        </div>
+        <div class="listing-body">
+          <div class="listing-price">$850,000</div>
+          <div class="listing-address">15 Danks Street, Waterloo NSW 2017</div>
+          <div class="listing-specs">
+            <span>🛏 2 bed</span>
+            <span>🚿 2 bath</span>
+            <span>🚗 1 car</span>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-photo">
+          <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80&fit=crop&auto=format" alt="3-bedroom apartment bedroom">
+          <div class="listing-badge">For Lease</div>
+        </div>
+        <div class="listing-body">
+          <div class="listing-price">$720 / week</div>
+          <div class="listing-address">8 Lachlan Street, Waterloo NSW 2017</div>
+          <div class="listing-specs">
+            <span>🛏 3 bed</span>
+            <span>🚿 2 bath</span>
+            <span>🚗 1 car</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY AGC -->
+<section class="section">
+  <div class="container">
+    <div class="why-grid">
+      <div>
+        <div class="label">Why AGC</div>
+        <h2 style="font-size:34px;font-weight:800;line-height:1.2;margin-bottom:18px;">A boutique agency<br>runs differently.</h2>
+        <p style="font-size:17px;color:var(--agc-muted);line-height:1.75;margin-bottom:36px;">
+          Most investors switch property managers because nobody picks up the phone.
+          AGC was built to fix that. Two directors. Every property managed personally.
+        </p>
+        <div class="why-points">
+          <div class="why-point">
+            <div class="why-num">1</div>
+            <div>
+              <h4>Personal management, not delegation</h4>
+              <p>Gwilym and Alan manage every property. Your investment is never handed to a junior PM or a call centre.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-num">2</div>
+            <div>
+              <h4>Suburb knowledge you can't fake</h4>
+              <p>Over ten years in Waterloo and surrounds — rent positioning, tenant quality, building-by-building vacancy insight.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-num">3</div>
+            <div>
+              <h4>Cantonese · Mandarin · English</h4>
+              <p>Waterloo's postcode is 16% Mandarin-speaking. A practical advantage no competitor currently offers locally.</p>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:32px;">
+          <a href="/about" class="btn btn--primary">Meet the team →</a>
+        </div>
+      </div>
+      <div class="why-visual">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&fit=crop&auto=format"
+             alt="Inner Sydney apartment building — Waterloo">
+        <div class="why-visual-overlay">
+          <p class="why-visual-quote">"I own three properties. Gwilym manages all of them. Hasn't dropped the ball once in four years."</p>
+          <div class="why-visual-cite">— Multi-property investor, Alexandria</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="label label--white">What landlords say</div>
+    <h2 style="font-size:32px;font-weight:800;color:white;margin-bottom:10px;">Investors who've been with AGC for years.</h2>
+    <p style="font-size:16px;color:rgba(255,255,255,0.5);margin-bottom:36px;max-width:520px;">Real feedback from property investors across inner Sydney.</p>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Gwilym picked up the phone every time. Every time. That doesn't sound like much until you've had an agent who doesn't."</blockquote>
+        <cite>— Waterloo landlord, managed since 2021</cite>
+        <div class="review-source">Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Found a quality tenant in 9 days. My previous agent took six weeks. The difference in how they handle applications is obvious."</blockquote>
+        <cite>— Zetland investor, 2BR apartment</cite>
+        <div class="review-source">RateMyAgent</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"I own three properties. Gwilym manages all of them. Hasn't dropped the ball once in four years."</blockquote>
+        <cite>— Multi-property investor, Alexandria</cite>
+        <div class="review-source">Google Review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD FORM -->
+<section class="section section--surface" id="enquire">
+  <div class="container">
+    <div class="form-strip">
+      <div class="form-strip-left">
+        <div class="label">Get started</div>
+        <h2>Talk to Gwilym. Get a fee quote within 24 hours.</h2>
+        <p>Whether you're looking to manage an investment property, buy, or sell — fill in your details and Gwilym will call you back. No obligation.</p>
+        <div class="form-trust-items">
+          <div class="form-trust-item">Gwilym calls you — not a call centre</div>
+          <div class="form-trust-item">Written fee quote within 24 hours</div>
+          <div class="form-trust-item">First year landlord insurance covered for PM clients</div>
+          <div class="form-trust-item">Cantonese, Mandarin, and English spoken</div>
+        </div>
+        <div style="margin-top:28px;padding:18px 22px;background:white;border:1px solid var(--agc-border);border-radius:var(--r-8);display:flex;align-items:center;gap:14px;">
+          <img src="gwilym.png" alt="Gwilym Chan"
+               style="width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:top;flex-shrink:0;"
+               onerror="this.style.background='var(--agc-blue)'">
+          <div>
+            <div style="font-size:15px;font-weight:700;">Gwilym Chan</div>
+            <div style="font-size:13px;color:var(--agc-muted);">Co-Founder &amp; Director</div>
+            <div style="font-size:13px;color:var(--agc-blue);font-weight:600;margin-top:2px;">📞 02 9413 1183</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="form-card">
+          <h3>Send an enquiry</h3>
+          <p class="form-sub">Managing your property, buying, or selling — tell us what you need.</p>
+          <div class="form-row">
+            <div><label>First name *</label><input type="text" placeholder="Your first name"></div>
+            <div><label>Last name *</label><input type="text" placeholder="Your last name"></div>
+          </div>
+          <div class="form-group"><label>Phone *</label><input type="tel" placeholder="0400 000 000"></div>
+          <div class="form-group"><label>Email *</label><input type="email" placeholder="you@email.com"></div>
+          <div class="form-group">
+            <label>I'm interested in *</label>
+            <select>
+              <option value="">Select one...</option>
+              <option>Property management — I have an investment property</option>
+              <option>Buying — I'm looking for a property</option>
+              <option>Selling — I want to list my property</option>
+              <option>Rental appraisal — free, no obligation</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Anything else?</label><input type="text" placeholder="Property address, questions, timing…"></div>
+          <button class="form-submit">Send enquiry →</button>
+          <p class="form-privacy">No spam. No third parties. AGC Real Estate — Lic. 10064170.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<div class="footer-cta">
+  <div>
+    <h2>Ready to talk? Gwilym calls within 24 hours.</h2>
+    <p>Property management, sales, appraisals — one call covers it all.</p>
+  </div>
+  <div class="footer-contact">
+    <div class="phone">02 9413 1183</div>
+    <div class="email">info@agcrealestate.com.au</div>
+    <div class="addr">Shop 264/8 Lachlan St, Waterloo NSW 2017</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">
+      <img src="https://agcrealestate.com.au/site_images/logo" alt="AGC Real Estate"
+           onerror="this.outerHTML='<span style=&quot;color:white;font-size:15px;font-weight:700;&quot;>AGC Real Estate</span>'">
+    </div>
+    <div class="lic">Lic. 10064170 · agcre.com.au · Shop 264/8 Lachlan St, Waterloo NSW 2017</div>
+  </div>
+  <div class="footer-links">
+    <a href="/property-management">Property Management</a>
+    <a href="/buy">Buying</a>
+    <a href="/sell">Selling</a>
+    <a href="/rent">Renting</a>
+    <a href="/about">About</a>
+  </div>
+</footer>
+
+</body>
+</html>
