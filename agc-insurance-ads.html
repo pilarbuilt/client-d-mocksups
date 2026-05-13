@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGC Real Estate — Final Ad Creatives</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --navy: #0C1F5C;
+            --blue: #4A90D9;
+            --blue-light: #89C0F0;
+            --white: #FFFFFF;
+        }
+
+        body {
+            background: #1a1a2e;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            padding: 60px 40px;
+        }
+
+        /* ─── Page header ─── */
+        .page-title {
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+        }
+
+        /* ─── Stage: two creatives side by side ─── */
+        .stage {
+            display: flex;
+            gap: 60px;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        /* ─── Creative wrapper ─── */
+        .creative-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .creative-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+        }
+
+        /* ─── Facebook feed chrome ─── */
+        .fb-chrome {
+            width: 420px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+        }
+
+        .fb-topbar {
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #e4e6ea;
+        }
+
+        .fb-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #c8cbd0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .fb-name { font-size: 14px; font-weight: 700; color: #1c1e21; line-height: 1.3; }
+        .fb-meta { font-size: 12px; color: #65676b; }
+        .fb-more { margin-left: auto; font-size: 20px; color: #65676b; line-height: 1; }
+
+        .fb-caption {
+            padding: 10px 14px 12px;
+            font-size: 14px;
+            color: #1c1e21;
+            line-height: 1.55;
+        }
+
+        /* ─── CREATIVE 1 — Square 1:1 ─── */
+        .ad1 {
+            width: 420px;
+            height: 420px;
+            position: relative;
+            overflow: hidden;
+            background: #0C1F5C; /* fallback if image fails */
+        }
+
+        .ad1-photo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Dark navy overlay — dims photo for legibility */
+        .ad1-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                160deg,
+                rgba(10, 22, 70, 0.72) 0%,
+                rgba(10, 22, 70, 0.60) 40%,
+                rgba(10, 22, 70, 0.78) 100%
+            );
+        }
+
+        /* Subtle brand arc — geometric identity */
+        .ad1-arc {
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 320px;
+            height: 320px;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 50%;
+        }
+        .ad1-arc2 {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 420px;
+            height: 420px;
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+
+        /* Top bar inside ad */
+        .ad1-top {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            right: 24px;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ad1-logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .logo-mark {
+            width: 36px;
+            height: 36px;
+            background: #c8cbd0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+            padding: 4px;
+        }
+
+        .logo-mark.sm {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            padding: 3px;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1.35;
+        }
+
+        .logo-text span {
+            font-weight: 400;
+            opacity: 0.55;
+            font-size: 9.5px;
+            display: block;
+        }
+
+        .ad1-geo {
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+        }
+
+        /* Bottom content area */
+        .ad1-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 3;
+            padding: 28px 26px;
+            background: linear-gradient(to top, rgba(10,22,70,0.95) 0%, transparent 100%);
+        }
+
+        .ad1-headline {
+            font-size: 76px;
+            font-weight: 900;
+            color: white;
+            line-height: 0.9;
+            letter-spacing: -3px;
+            margin-bottom: 14px;
+        }
+
+        .ad1-sub {
+            font-size: 13px;
+            color: rgba(255,255,255,0.78);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            max-width: 230px;
+        }
+
+        .ad1-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            color: var(--navy);
+            font-size: 12px;
+            font-weight: 800;
+            padding: 11px 18px;
+            border-radius: 6px;
+            letter-spacing: 0.03em;
+        }
+
+        /* ─── Facebook link preview bar ─── */
+        .fb-linkbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 14px;
+            background: #f0f2f5;
+        }
+        .fb-linkbar-title { font-size: 13px; font-weight: 700; color: #1c1e21; }
+        .fb-linkbar-desc { font-size: 11px; color: #65676b; margin-top: 2px; }
+        .fb-linkbar-btn {
+            background: #e4e6eb;
+            border-radius: 6px;
+            padding: 7px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1c1e21;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .fb-reactions {
+            padding: 2px 14px 0;
+            display: flex;
+            border-top: 1px solid #e4e6ea;
+        }
+
+        .fb-react {
+            flex: 1;
+            text-align: center;
+            padding: 8px 4px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #65676b;
+        }
+
+        /* ─── CREATIVE 2 — Portrait 4:5 ─── */
+        .ig-chrome {
+            width: 360px;
+            background: black;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+        }
+
+        /* Instagram top bar */
+        .ig-topbar {
+            background: #000;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ig-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7);
+            padding: 2px;
+            flex-shrink: 0;
+        }
+        .ig-avatar-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #c8cbd0;
+            border: 1.5px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ig-name { font-size: 13px; font-weight: 700; color: white; }
+        .ig-sponsored { font-size: 11px; color: #8e8e8e; }
+        .ig-more { margin-left: auto; font-size: 18px; color: white; }
+
+        /* The ad itself — 4:5 ratio */
+        .ad2 {
+            width: 360px;
+            height: 450px; /* 4:5 = 360 * 1.25 = 450 */
+            position: relative;
+            overflow: hidden;
+            background: #0a1540;
+        }
+
+        .ad2-photo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+        }
+
+        /* Heavy gradient overlay — top lighter, bottom very dark for text */
+        .ad2-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(10, 20, 60, 0.30) 0%,
+                rgba(10, 20, 60, 0.20) 35%,
+                rgba(10, 20, 60, 0.65) 65%,
+                rgba(8, 16, 52, 0.95) 100%
+            );
+        }
+
+        /* Brand accent line */
+        .ad2-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--blue), transparent 60%);
+            z-index: 3;
+        }
+
+        .ad2-top {
+            position: absolute;
+            top: 18px;
+            left: 20px;
+            right: 20px;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+        }
+
+        .ad2-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 3;
+            padding: 0 22px 22px;
+        }
+
+        .ad2-eyebrow {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--blue-light);
+            margin-bottom: 12px;
+        }
+
+        .ad2-headline {
+            font-size: 44px;
+            font-weight: 900;
+            color: white;
+            line-height: 0.95;
+            letter-spacing: -1.5px;
+            margin-bottom: 14px;
+        }
+
+        .ad2-divider {
+            width: 32px;
+            height: 2px;
+            background: var(--blue);
+            margin-bottom: 14px;
+        }
+
+        .ad2-sub {
+            font-size: 12.5px;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.65;
+            margin-bottom: 20px;
+            max-width: 270px;
+        }
+
+        .ad2-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .ad2-cta {
+            background: white;
+            color: var(--navy);
+            font-size: 11.5px;
+            font-weight: 800;
+            padding: 11px 17px;
+            border-radius: 6px;
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+        }
+
+        .ad2-phone {
+            font-size: 11px;
+            color: rgba(255,255,255,0.45);
+        }
+
+        /* Director pill on ad2 */
+        .ad2-director {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(12, 31, 92, 0.75);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 20px;
+            padding: 5px 10px 5px 5px;
+        }
+
+        .ad2-dir-avatar {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4A90D9, #1a5aaf);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .ad2-dir-text {
+            font-size: 9.5px;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.3;
+        }
+
+        .ad2-dir-text strong {
+            color: white;
+            font-weight: 700;
+            font-size: 10px;
+            display: block;
+        }
+
+        /* Instagram bottom bar */
+        .ig-bottombar {
+            background: black;
+            padding: 10px 14px;
+        }
+
+        .ig-actions {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .ig-icon {
+            color: white;
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .ig-icon.save { margin-left: auto; }
+
+        .ig-likes { font-size: 13px; font-weight: 700; color: white; margin-bottom: 4px; }
+        .ig-caption { font-size: 13px; color: white; line-height: 1.4; }
+        .ig-caption strong { font-weight: 700; }
+
+        /* ─── Image credit note ─── */
+        .img-note {
+            font-size: 10px;
+            color: rgba(255,255,255,0.2);
+            letter-spacing: 0.08em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-title">AGC Real Estate · Landlord Insurance Ads · Final Concepts · May 2026</div>
+
+<div class="stage">
+
+    <!-- ════════════════════════════════════
+         CREATIVE 1 — Square 1:1
+         Facebook Feed
+    ════════════════════════════════════ -->
+    <div class="creative-wrap">
+        <div class="creative-label">Creative 1 · 1:1 Square · Facebook Feed</div>
+
+        <div class="fb-chrome">
+            <!-- Facebook chrome top bar -->
+            <div class="fb-topbar">
+                <div class="fb-avatar">
+                    <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                        <!-- Angular A — dark charcoal -->
+                        <path d="M10 48L24 8L38 48" stroke="#2a2a2a" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="square"/>
+                        <line x1="15.5" y1="34" x2="32.5" y2="34" stroke="#2a2a2a" stroke-width="4" stroke-linecap="square"/>
+                        <!-- C arc — blue, wrapping right side -->
+                        <path d="M34 10 A20 20 0 1 0 34 48" stroke="#3A8BC9" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="fb-name">AGC Real Estate</div>
+                    <div class="fb-meta">Sponsored · 🌐</div>
+                </div>
+                <div class="fb-more">···</div>
+            </div>
+
+            <!-- Caption above ad -->
+            <div class="fb-caption">
+                Thinking about switching property managers? We include 12 months of specialist landlord insurance at no extra cost. Director-led. Inner Sydney focused. We handle the entire switch for you.
+            </div>
+
+            <!-- THE AD -->
+            <div class="ad1">
+                <!-- Background photo: premium apartment interior -->
+                <img
+                    class="ad1-photo"
+                    src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=840&q=85"
+                    alt="Premium Sydney apartment interior"
+                    onerror="this.style.display='none'"
+                />
+
+                <!-- Overlays -->
+                <div class="ad1-overlay"></div>
+                <div class="ad1-arc"></div>
+                <div class="ad1-arc2"></div>
+
+                <!-- Top: logo + geo tag -->
+                <div class="ad1-top">
+                    <div class="ad1-logo">
+                        <div class="logo-mark">
+                            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                                <path d="M10 48L24 8L38 48" stroke="#2a2a2a" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="square"/>
+                                <line x1="15.5" y1="34" x2="32.5" y2="34" stroke="#2a2a2a" stroke-width="4" stroke-linecap="square"/>
+                                <path d="M34 10 A20 20 0 1 0 34 48" stroke="#3A8BC9" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                            </svg>
+                        </div>
+                        <div class="logo-text">
+                            AGC Real Estate
+                            <span>Waterloo · Inner Sydney</span>
+                        </div>
+                    </div>
+                    <div class="ad1-geo">Est. 2014</div>
+                </div>
+
+                <!-- Bottom: headline + copy + CTA -->
+                <div class="ad1-bottom">
+                    <div class="ad1-headline">Covered.</div>
+                    <div class="ad1-sub">Switch to AGC and your first 12 months of specialist landlord insurance is included.</div>
+                    <div class="ad1-cta">Talk to a Director &nbsp;→</div>
+                </div>
+            </div>
+
+            <!-- Facebook link preview -->
+            <div class="fb-linkbar">
+                <div>
+                    <div class="fb-linkbar-title">AGC Real Estate — Inner Sydney</div>
+                    <div class="fb-linkbar-desc">Landlord insurance included when you switch</div>
+                </div>
+                <div class="fb-linkbar-btn">Learn More</div>
+            </div>
+
+            <!-- Reaction bar -->
+            <div class="fb-reactions">
+                <div class="fb-react">👍 Like</div>
+                <div class="fb-react">💬 Comment</div>
+                <div class="fb-react">↗ Share</div>
+            </div>
+        </div>
+
+        <div class="img-note">Photo: premium apartment interior · replace with real AGC property photo for best results</div>
+    </div>
+
+
+    <!-- ════════════════════════════════════
+         CREATIVE 2 — Portrait 4:5
+         Instagram Feed
+    ════════════════════════════════════ -->
+    <div class="creative-wrap">
+        <div class="creative-label">Creative 2 · 4:5 Portrait · Instagram Feed</div>
+
+        <div class="ig-chrome">
+            <!-- Instagram chrome top bar -->
+            <div class="ig-topbar">
+                <div class="ig-avatar">
+                    <div class="ig-avatar-inner">
+                        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px">
+                            <path d="M10 48L24 8L38 48" stroke="#2a2a2a" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="square"/>
+                            <line x1="15.5" y1="34" x2="32.5" y2="34" stroke="#2a2a2a" stroke-width="4" stroke-linecap="square"/>
+                            <path d="M34 10 A20 20 0 1 0 34 48" stroke="#3A8BC9" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                        </svg>
+                    </div>
+                </div>
+                <div>
+                    <div class="ig-name">agc_realestate</div>
+                    <div class="ig-sponsored">Sponsored</div>
+                </div>
+                <div class="ig-more">···</div>
+            </div>
+
+            <!-- THE AD -->
+            <div class="ad2">
+                <!-- Background photo: inner Sydney suburb aerial — apartment buildings, terraces, city -->
+                <img
+                    class="ad2-photo"
+                    src="https://images.unsplash.com/photo-1598228723793-52759bba239c?auto=format&fit=crop&w=720&q=85"
+                    alt="Inner Sydney suburb aerial view"
+                    onerror="this.style.display='none'"
+                />
+
+                <!-- Overlays -->
+                <div class="ad2-line"></div>
+                <div class="ad2-overlay"></div>
+
+                <!-- Top: logo -->
+                <div class="ad2-top">
+                    <div class="ad1-logo">
+                        <div class="logo-mark sm">
+                            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                                <path d="M10 48L24 8L38 48" stroke="#2a2a2a" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="square"/>
+                                <line x1="15.5" y1="34" x2="32.5" y2="34" stroke="#2a2a2a" stroke-width="4" stroke-linecap="square"/>
+                                <path d="M34 10 A20 20 0 1 0 34 48" stroke="#3A8BC9" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                            </svg>
+                        </div>
+                        <div class="logo-text" style="font-size:10px">
+                            AGC Real Estate
+                            <span>Waterloo · Inner Sydney</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Director pill top right -->
+                <div class="ad2-director">
+                    <div class="ad2-dir-avatar">G</div>
+                    <div class="ad2-dir-text">
+                        <strong>Gwilym Chan</strong>
+                        Director
+                    </div>
+                </div>
+
+                <!-- Bottom content -->
+                <div class="ad2-bottom">
+                    <div class="ad2-eyebrow">Inner Sydney Property Management</div>
+                    <div class="ad2-headline">Your<br>investment.<br>Protected.</div>
+                    <div class="ad2-divider"></div>
+                    <div class="ad2-sub">Switch to AGC and receive 12 months of specialist landlord insurance, included. No extra paperwork. We handle everything.</div>
+                    <div class="ad2-row">
+                        <div class="ad2-cta">Talk to a Director</div>
+                        <div class="ad2-phone">02 9413 1183</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instagram bottom chrome -->
+            <div class="ig-bottombar">
+                <div class="ig-actions">
+                    <div class="ig-icon">♡</div>
+                    <div class="ig-icon">💬</div>
+                    <div class="ig-icon">✈</div>
+                    <div class="ig-icon save">🔖</div>
+                </div>
+                <div class="ig-likes">Sponsored</div>
+                <div class="ig-caption"><strong>agc_realestate</strong> Thinking of switching property managers? We've got your first year of specialist landlord insurance covered, included when you come on board. Director-led. Inner Sydney specialists since 2014. Link in bio.</div>
+            </div>
+        </div>
+
+        <div class="img-note">Photo: inner Sydney suburb aerial · swap for Waterloo/Redfern aerial for maximum local authority</div>
+    </div>
+
+</div>
+
+</body>
+</html>
