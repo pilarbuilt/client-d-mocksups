@@ -513,6 +513,436 @@
             letter-spacing: 0.08em;
             text-align: center;
         }
+
+        /* ─── Section divider ─── */
+        .section-divider {
+            text-align: center;
+            color: rgba(255,255,255,0.12);
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin: 64px 0 48px;
+        }
+
+        /* ══════════════════════════════════════
+           CREATIVE 3 — Square 1:1, Facebook
+        ══════════════════════════════════════ */
+        .ad3 {
+            width: 420px;
+            height: 420px;
+            position: relative;
+            overflow: hidden;
+            background: white;
+        }
+
+        .ad3-photo {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 60%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 0;
+        }
+
+        .ad3-fade {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, #ffffff 40%, rgba(255,255,255,0.9) 54%, rgba(255,255,255,0.28) 74%, transparent 100%);
+            z-index: 1;
+        }
+
+        /* Top bar */
+        .ad3-topbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            z-index: 5;
+            background: rgba(255,255,255,0.97);
+            border-bottom: 1px solid rgba(0,0,0,0.07);
+            display: flex;
+            align-items: center;
+            padding: 0 18px;
+            gap: 10px;
+        }
+
+        .ad3-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ad3-logo-mark {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+
+        .ad3-brand-text {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            line-height: 1.3;
+        }
+
+        .ad3-brand-text span {
+            display: block;
+            font-size: 8px;
+            font-weight: 400;
+            color: #aaa;
+            text-transform: none;
+            letter-spacing: 0.02em;
+        }
+
+        .ad3-est {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 7.5px;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: #bbb;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .ad3-est::before, .ad3-est::after {
+            content: '';
+            display: block;
+            width: 16px;
+            height: 1px;
+            background: #ccc;
+        }
+
+        .ad3-director-pill {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: #1c1e21;
+            border-radius: 22px;
+            padding: 5px 12px 5px 5px;
+            flex-shrink: 0;
+        }
+
+        .ad3-dir-av {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4A90D9, #1a5aaf);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .ad3-dir-name {
+            font-size: 10.5px;
+            font-weight: 700;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .ad3-dir-role {
+            font-size: 8.5px;
+            color: rgba(255,255,255,0.55);
+        }
+
+        /* Main content */
+        .ad3-content {
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 54%;
+            bottom: 118px;
+            z-index: 3;
+            padding: 20px 20px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .ad3-headline {
+            font-size: 60px;
+            font-weight: 900;
+            color: var(--navy);
+            line-height: 0.88;
+            letter-spacing: -2px;
+            margin-bottom: 13px;
+        }
+
+        .ad3-bar {
+            width: 32px;
+            height: 3px;
+            background: var(--blue);
+            margin-bottom: 13px;
+        }
+
+        .ad3-body {
+            font-size: 11.5px;
+            color: #444;
+            line-height: 1.65;
+        }
+
+        .ad3-body em {
+            font-style: normal;
+            color: var(--blue);
+            font-weight: 600;
+        }
+
+        /* Icon strip */
+        .ad3-icons {
+            position: absolute;
+            bottom: 58px;
+            left: 0;
+            right: 0;
+            height: 60px;
+            z-index: 4;
+            background: rgba(255,255,255,0.97);
+            border-top: 1px solid rgba(0,0,0,0.07);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            display: flex;
+            align-items: center;
+        }
+
+        .ad3-icon-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: 8px 4px;
+            border-right: 1px solid rgba(0,0,0,0.07);
+            font-size: 8.5px;
+            font-weight: 600;
+            color: var(--navy);
+            line-height: 1.35;
+            text-align: center;
+        }
+
+        .ad3-icon-item:last-child { border-right: none; }
+
+        /* Footer bar */
+        .ad3-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 58px;
+            z-index: 5;
+            background: var(--navy);
+            display: flex;
+            align-items: center;
+            padding: 0 18px;
+            gap: 16px;
+        }
+
+        .ad3-footer-cta {
+            background: var(--blue);
+            color: white;
+            font-size: 11.5px;
+            font-weight: 700;
+            padding: 9px 18px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .ad3-footer-phone {
+            font-size: 10.5px;
+            color: rgba(255,255,255,0.45);
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        /* ══════════════════════════════════════
+           CREATIVE 4 — Square 1:1, Instagram
+        ══════════════════════════════════════ */
+        .ad4 {
+            width: 360px;
+            height: 360px;
+            position: relative;
+            overflow: hidden;
+            background: white;
+        }
+
+        .ad4-photo {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 70%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 0;
+        }
+
+        .ad4-fade {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, #ffffff 28%, rgba(255,255,255,0.92) 44%, rgba(255,255,255,0.5) 62%, rgba(255,255,255,0.08) 82%, transparent 100%);
+            z-index: 1;
+        }
+
+        .ad4-top {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            right: 14px;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .ad4-logo-mark {
+            width: 34px;
+            height: 34px;
+            flex-shrink: 0;
+        }
+
+        .ad4-brand-text {
+            font-size: 9px;
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            line-height: 1.3;
+        }
+
+        .ad4-brand-text span {
+            display: block;
+            font-size: 7.5px;
+            font-weight: 400;
+            color: #aaa;
+            text-transform: none;
+            letter-spacing: 0.02em;
+        }
+
+        .ad4-director-pill {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #1c1e21;
+            border-radius: 20px;
+            padding: 4px 10px 4px 4px;
+            flex-shrink: 0;
+        }
+
+        .ad4-dir-av {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4A90D9, #1a5aaf);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .ad4-dir-name {
+            font-size: 9.5px;
+            font-weight: 700;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .ad4-dir-role {
+            font-size: 8px;
+            color: rgba(255,255,255,0.55);
+        }
+
+        .ad4-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 56%;
+            bottom: 0;
+            z-index: 3;
+            padding: 60px 16px 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .ad4-eyebrow {
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .ad4-headline {
+            font-size: 37px;
+            font-weight: 900;
+            color: var(--navy);
+            line-height: 0.93;
+            letter-spacing: -1.5px;
+            margin-bottom: 10px;
+        }
+
+        .ad4-divider {
+            width: 26px;
+            height: 2.5px;
+            background: var(--blue);
+            margin-bottom: 12px;
+        }
+
+        .ad4-body {
+            font-size: 9.5px;
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .ad4-body em {
+            font-style: normal;
+            color: var(--blue);
+            font-weight: 600;
+        }
+
+        .ad4-cta {
+            background: var(--blue);
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 8px 14px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            align-self: flex-start;
+            margin-bottom: 9px;
+        }
+
+        .ad4-phone {
+            font-size: 9px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
     </style>
 </head>
 <body>
@@ -707,6 +1137,236 @@
         </div>
 
         <div class="img-note">Photo: inner Sydney suburb aerial · swap for Waterloo/Redfern aerial for maximum local authority</div>
+    </div>
+
+</div>
+
+<div class="section-divider">· · ·</div>
+
+<div class="stage">
+
+    <!-- ════════════════════════════════════
+         CREATIVE 3 — Square 1:1
+         Facebook Feed
+    ════════════════════════════════════ -->
+    <div class="creative-wrap">
+        <div class="creative-label">Creative 3 · 1:1 Square · Facebook Feed</div>
+
+        <div class="fb-chrome">
+            <!-- Facebook chrome top bar -->
+            <div class="fb-topbar">
+                <div class="fb-avatar">
+                    <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                        <path d="M10 48L24 8L38 48" stroke="#2a2a2a" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="square"/>
+                        <line x1="15.5" y1="34" x2="32.5" y2="34" stroke="#2a2a2a" stroke-width="4" stroke-linecap="square"/>
+                        <path d="M34 10 A20 20 0 1 0 34 48" stroke="#3A8BC9" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="fb-name">AGC Real Estate</div>
+                    <div class="fb-meta">Sponsored · 🌐</div>
+                </div>
+                <div class="fb-more">···</div>
+            </div>
+
+            <!-- Caption -->
+            <div class="fb-caption">
+                Thinking about switching property managers? We include 12 months of specialist landlord insurance at no extra cost. Director-led. Inner Sydney focused. We handle the entire switch for you.
+            </div>
+
+            <!-- THE AD -->
+            <div class="ad3">
+                <!-- Background photo: premium apartment interior -->
+                <img
+                    class="ad3-photo"
+                    src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=840&q=85"
+                    alt="Premium Sydney apartment interior"
+                    onerror="this.style.display='none'"
+                />
+                <div class="ad3-fade"></div>
+
+                <!-- Top bar: logo | EST. 2014 | director pill -->
+                <div class="ad3-topbar">
+                    <div class="ad3-brand">
+                        <svg class="ad3-logo-mark" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 48L24 8L38 48" stroke="#2a2a2a" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="square"/>
+                            <line x1="15.5" y1="34" x2="32.5" y2="34" stroke="#2a2a2a" stroke-width="4" stroke-linecap="square"/>
+                            <path d="M34 10 A20 20 0 1 0 34 48" stroke="#3A8BC9" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                        </svg>
+                        <div class="ad3-brand-text">
+                            AGC Real Estate
+                            <span>Waterloo · Inner Sydney</span>
+                        </div>
+                    </div>
+                    <div class="ad3-est">EST. 2014</div>
+                    <div class="ad3-director-pill">
+                        <div class="ad3-dir-av">G</div>
+                        <div>
+                            <div class="ad3-dir-name">Gwilym Chan</div>
+                            <div class="ad3-dir-role">Director</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main content: headline + body -->
+                <div class="ad3-content">
+                    <div class="ad3-headline">Covered</div>
+                    <div class="ad3-bar"></div>
+                    <div class="ad3-body">Switch to AGC and your first <em>12 months</em> of specialist landlord insurance is included.</div>
+                </div>
+
+                <!-- 4-icon feature strip -->
+                <div class="ad3-icons">
+                    <div class="ad3-icon-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <polyline points="9 12 11 14 15 10"/>
+                        </svg>
+                        12 Months<br>Insurance
+                    </div>
+                    <div class="ad3-icon-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        Talk to a<br>Director
+                    </div>
+                    <div class="ad3-icon-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <polyline points="9 13 11 15 15 11"/>
+                        </svg>
+                        No Extra<br>Paperwork
+                    </div>
+                    <div class="ad3-icon-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        All Covered,<br>Simple
+                    </div>
+                </div>
+
+                <!-- Dark navy footer bar -->
+                <div class="ad3-footer">
+                    <div class="ad3-footer-cta">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.61a16 16 0 0 0 5.48 5.48l.94-1.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        Talk to a Director &nbsp;→
+                    </div>
+                    <div class="ad3-footer-phone">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.61a16 16 0 0 0 5.48 5.48l.94-1.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        02 9413 1183
+                    </div>
+                </div>
+            </div>
+
+            <!-- Facebook link preview -->
+            <div class="fb-linkbar">
+                <div>
+                    <div class="fb-linkbar-title">AGC Real Estate — Inner Sydney</div>
+                    <div class="fb-linkbar-desc">Landlord insurance included when you switch</div>
+                </div>
+                <div class="fb-linkbar-btn">Learn More</div>
+            </div>
+
+            <!-- Reaction bar -->
+            <div class="fb-reactions">
+                <div class="fb-react">👍 Like</div>
+                <div class="fb-react">💬 Comment</div>
+                <div class="fb-react">↗ Share</div>
+            </div>
+        </div>
+
+        <div class="img-note">Photo: premium apartment interior · replace with real AGC property photo for best results</div>
+    </div>
+
+
+    <!-- ════════════════════════════════════
+         CREATIVE 4 — Square 1:1
+         Instagram Feed
+    ════════════════════════════════════ -->
+    <div class="creative-wrap">
+        <div class="creative-label">Creative 4 · 1:1 Square · Instagram Feed</div>
+
+        <div class="ig-chrome">
+            <!-- Instagram chrome top bar -->
+            <div class="ig-topbar">
+                <div class="ig-avatar">
+                    <div class="ig-avatar-inner">
+                        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px">
+                            <path d="M10 48L24 8L38 48" stroke="#2a2a2a" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="square"/>
+                            <line x1="15.5" y1="34" x2="32.5" y2="34" stroke="#2a2a2a" stroke-width="4" stroke-linecap="square"/>
+                            <path d="M34 10 A20 20 0 1 0 34 48" stroke="#3A8BC9" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                        </svg>
+                    </div>
+                </div>
+                <div>
+                    <div class="ig-name">agc_realestate</div>
+                    <div class="ig-sponsored">Sponsored</div>
+                </div>
+                <div class="ig-more">···</div>
+            </div>
+
+            <!-- THE AD -->
+            <div class="ad4">
+                <!-- Background photo: residential house exterior -->
+                <img
+                    class="ad4-photo"
+                    src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=720&q=85"
+                    alt="Residential house exterior"
+                    onerror="this.style.display='none'"
+                />
+                <div class="ad4-fade"></div>
+
+                <!-- Top: logo + director pill -->
+                <div class="ad4-top">
+                    <svg class="ad4-logo-mark" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 48L24 8L38 48" stroke="#2a2a2a" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="square"/>
+                        <line x1="15.5" y1="34" x2="32.5" y2="34" stroke="#2a2a2a" stroke-width="4" stroke-linecap="square"/>
+                        <path d="M34 10 A20 20 0 1 0 34 48" stroke="#3A8BC9" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                    </svg>
+                    <div class="ad4-brand-text">
+                        AGC Real Estate
+                        <span>Waterloo · Inner Sydney</span>
+                    </div>
+                    <div class="ad4-director-pill">
+                        <div class="ad4-dir-av">G</div>
+                        <div>
+                            <div class="ad4-dir-name">Gwilym Chan</div>
+                            <div class="ad4-dir-role">Director</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="ad4-content">
+                    <div class="ad4-eyebrow">Inner Sydney<br>Property Management</div>
+                    <div class="ad4-headline">Your<br>investment<br>Protected</div>
+                    <div class="ad4-divider"></div>
+                    <div class="ad4-body">Switch to AGC and receive <em>12 months</em> of specialist landlord insurance, included. No extra paperwork. We handle everything.</div>
+                    <div class="ad4-cta">Talk to a Director</div>
+                    <div class="ad4-phone">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.61a16 16 0 0 0 5.48 5.48l.94-1.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        02 9413 1183
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instagram bottom chrome -->
+            <div class="ig-bottombar">
+                <div class="ig-actions">
+                    <div class="ig-icon">♡</div>
+                    <div class="ig-icon">💬</div>
+                    <div class="ig-icon">✈</div>
+                    <div class="ig-icon save">🔖</div>
+                </div>
+                <div class="ig-likes">Sponsored</div>
+                <div class="ig-caption"><strong>agc_realestate</strong> Thinking of switching property managers? We've got your first year of specialist landlord insurance covered, included when you come on board. Director-led. Inner Sydney specialists since 2014. Link in bio.</div>
+            </div>
+        </div>
+
+        <div class="img-note">Photo: residential house exterior · replace with an Inner Sydney property for best results</div>
     </div>
 
 </div>
