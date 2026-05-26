@@ -943,6 +943,173 @@
             align-items: center;
             gap: 5px;
         }
+
+        /* ══════════════════════════════════════
+           CREATIVE 5 — Updated Creative
+           New topbar: location text + names pill
+        ══════════════════════════════════════ */
+
+        /* Ad canvas — inherits ad3 photo/fade/content/icons/footer */
+        .ad5 {
+            width: 420px;
+            height: 420px;
+            position: relative;
+            overflow: hidden;
+            background: white;
+        }
+
+        .ad5-sm {
+            width: 360px;
+            height: 360px;
+            position: relative;
+            overflow: hidden;
+            background: white;
+        }
+
+        .ad5 .ad3-photo,
+        .ad5-sm .ad3-photo {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 60%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 0;
+        }
+
+        .ad5 .ad3-fade,
+        .ad5-sm .ad3-fade {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, #ffffff 40%, rgba(255,255,255,0.9) 54%, rgba(255,255,255,0.28) 74%, transparent 100%);
+            z-index: 1;
+        }
+
+        /* Top bar — taller, location text left, pill+founders right */
+        .ad5-topbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 82px;
+            z-index: 5;
+            background: rgba(255,255,255,0.97);
+            border-bottom: 1px solid rgba(0,0,0,0.07);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 18px;
+        }
+
+        .ad5-topbar-sm {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            z-index: 5;
+            background: rgba(255,255,255,0.97);
+            border-bottom: 1px solid rgba(0,0,0,0.07);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+        }
+
+        .ad5-location {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: -0.4px;
+            line-height: 1.15;
+        }
+
+        .ad5-location-sm {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: -0.3px;
+            line-height: 1.15;
+        }
+
+        .ad5-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+
+        .ad5-names-pill {
+            background: #1c1e21;
+            border-radius: 22px;
+            padding: 8px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .ad5-names-pill-sm {
+            background: #1c1e21;
+            border-radius: 18px;
+            padding: 6px 13px;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .ad5-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: white;
+            line-height: 1.25;
+        }
+
+        .ad5-name-sm {
+            font-size: 11px;
+            font-weight: 700;
+            color: white;
+            line-height: 1.25;
+        }
+
+        .ad5-founders {
+            font-size: 9px;
+            color: #999;
+            text-align: right;
+        }
+
+        .ad5-founders-sm {
+            font-size: 8px;
+            color: #999;
+            text-align: right;
+        }
+
+        /* Content block */
+        .ad5-content {
+            position: absolute;
+            top: 82px;
+            left: 0;
+            width: 54%;
+            bottom: 118px;
+            z-index: 3;
+            padding: 20px 20px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .ad5-content-sm {
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 52%;
+            bottom: 108px;
+            z-index: 3;
+            padding: 16px 16px 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -1288,11 +1455,15 @@
 
 <div class="stage">
 
-    <!-- CREATIVE 5 — Facebook -->
+    <!-- ════════════════════════════════════
+         CREATIVE 5 — Square 1:1
+         Facebook Feed
+    ════════════════════════════════════ -->
     <div class="creative-wrap">
         <div class="creative-label">Creative 5 · 1:1 Square · Facebook Feed</div>
 
         <div class="fb-chrome">
+            <!-- Facebook chrome top bar -->
             <div class="fb-topbar">
                 <div class="fb-avatar">
                     <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
@@ -1308,43 +1479,36 @@
                 <div class="fb-more">···</div>
             </div>
 
-            <div class="ad3">
+            <!-- THE AD -->
+            <div class="ad5">
+                <!-- Background photo: premium Sydney apartment interior -->
                 <img class="ad3-photo"
                     src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=840&q=85"
                     alt="Premium Sydney apartment interior"
                     onerror="this.style.display='none'"/>
                 <div class="ad3-fade"></div>
 
-                <div class="ad3-topbar">
-                    <div class="ad3-brand">
-                        <svg class="ad3-logo-mark" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 48L24 8L38 48" stroke="#2a2a2a" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="square"/>
-                            <line x1="15.5" y1="34" x2="32.5" y2="34" stroke="#2a2a2a" stroke-width="4" stroke-linecap="square"/>
-                            <path d="M34 10 A20 20 0 1 0 34 48" stroke="#3A8BC9" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-                        </svg>
-                        <div class="ad3-brand-text" style="font-size:9px;font-weight:500;color:#888;letter-spacing:0.04em;text-transform:none;">Waterloo · Inner Sydney</div>
-                    </div>
-                    <div class="ad3-est">20 YRS IN INDUSTRY</div>
-                    <div class="ad3-director-pill">
-                        <div class="ad3-dir-av">G</div>
-                        <div>
-                            <div class="ad3-dir-name" style="font-size:9.5px;">Gwilym Chan</div>
-                            <div class="ad3-dir-name" style="font-size:9.5px;margin-top:2px;">Alan Chan</div>
+                <!-- Top bar: location left, names pill right -->
+                <div class="ad5-topbar">
+                    <div class="ad5-location">Waterloo<br>Inner Sydney</div>
+                    <div class="ad5-right">
+                        <div class="ad5-names-pill">
+                            <div class="ad5-name">Gwilym Chan</div>
+                            <div class="ad5-name">Alan Chan</div>
                         </div>
+                        <div class="ad5-founders">— Founders</div>
                     </div>
                 </div>
 
-                <div class="ad3-content">
+                <!-- Main copy -->
+                <div class="ad5-content">
                     <div class="ad3-headline">Covered</div>
                     <div class="ad3-bar"></div>
-                    <div class="ad3-body">Join AGC and your first <em>12 months</em> of specialist landlord insurance is included.</div>
+                    <div class="ad3-body"><em>Join</em> AGC and your first <em>12 months</em> of specialist landlord insurance is included.</div>
                 </div>
 
+                <!-- 3-icon strip -->
                 <div class="ad3-icons">
-                    <div class="ad3-icon-item">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-                        12 Months<br>Insurance
-                    </div>
                     <div class="ad3-icon-item">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.61a16 16 0 0 0 5.48 5.48l.94-1.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                         Speak<br>to Us
@@ -1354,31 +1518,30 @@
                         No Extra<br>Paperwork
                     </div>
                     <div class="ad3-icon-item">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
                         All Covered,<br>Simple
                     </div>
                 </div>
 
+                <!-- Navy footer -->
                 <div class="ad3-footer">
                     <div class="ad3-footer-cta">
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.61a16 16 0 0 0 5.48 5.48l.94-1.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                         Speak to Us &nbsp;→
                     </div>
-                    <div class="ad3-footer-phone">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.61a16 16 0 0 0 5.48 5.48l.94-1.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        02 9413 1183
-                    </div>
                 </div>
             </div>
 
+            <!-- Facebook link preview -->
             <div class="fb-linkbar">
                 <div>
                     <div class="fb-linkbar-title">AGC Real Estate</div>
-                    <div class="fb-linkbar-desc">Landlord insurance included when you join. T&C Apply</div>
+                    <div class="fb-linkbar-desc">Landlord insurance included when you join. T&amp;C Apply</div>
                 </div>
                 <div class="fb-linkbar-btn">Learn More</div>
             </div>
 
+            <!-- Reaction bar -->
             <div class="fb-reactions">
                 <div class="fb-react">👍 Like</div>
                 <div class="fb-react">💬 Comment</div>
@@ -1388,11 +1551,15 @@
     </div>
 
 
-    <!-- CREATIVE 5 — Instagram -->
+    <!-- ════════════════════════════════════
+         CREATIVE 5 — Square 1:1
+         Instagram Feed
+    ════════════════════════════════════ -->
     <div class="creative-wrap">
         <div class="creative-label">Creative 5 · 1:1 Square · Instagram Feed</div>
 
         <div class="ig-chrome">
+            <!-- Instagram chrome top bar -->
             <div class="ig-topbar">
                 <div class="ig-avatar">
                     <div class="ig-avatar-inner">
@@ -1410,43 +1577,35 @@
                 <div class="ig-more">···</div>
             </div>
 
-            <div class="ad3" style="width:360px;height:360px;">
+            <!-- THE AD -->
+            <div class="ad5-sm">
                 <img class="ad3-photo"
                     src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=720&q=85"
                     alt="Premium Sydney apartment interior"
                     onerror="this.style.display='none'"/>
                 <div class="ad3-fade"></div>
 
-                <div class="ad3-topbar" style="height:60px;">
-                    <div class="ad3-brand">
-                        <svg class="ad3-logo-mark" style="width:32px;height:32px;" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 48L24 8L38 48" stroke="#2a2a2a" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="square"/>
-                            <line x1="15.5" y1="34" x2="32.5" y2="34" stroke="#2a2a2a" stroke-width="4" stroke-linecap="square"/>
-                            <path d="M34 10 A20 20 0 1 0 34 48" stroke="#3A8BC9" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-                        </svg>
-                        <div class="ad3-brand-text" style="font-size:8px;font-weight:500;color:#888;letter-spacing:0.03em;text-transform:none;">Waterloo · Inner Sydney</div>
-                    </div>
-                    <div class="ad3-est" style="font-size:7px;">20 YRS IN INDUSTRY</div>
-                    <div class="ad3-director-pill" style="padding:4px 9px 4px 4px;">
-                        <div class="ad3-dir-av" style="width:24px;height:24px;font-size:10px;">G</div>
-                        <div>
-                            <div class="ad3-dir-name" style="font-size:8.5px;">Gwilym Chan</div>
-                            <div class="ad3-dir-name" style="font-size:8.5px;margin-top:2px;">Alan Chan</div>
+                <!-- Top bar: location left, names pill right -->
+                <div class="ad5-topbar-sm">
+                    <div class="ad5-location-sm">Waterloo<br>Inner Sydney</div>
+                    <div class="ad5-right">
+                        <div class="ad5-names-pill-sm">
+                            <div class="ad5-name-sm">Gwilym Chan</div>
+                            <div class="ad5-name-sm">Alan Chan</div>
                         </div>
+                        <div class="ad5-founders-sm">— Founders</div>
                     </div>
                 </div>
 
-                <div class="ad3-content" style="top:60px;bottom:108px;width:52%;">
+                <!-- Main copy -->
+                <div class="ad5-content-sm">
                     <div class="ad3-headline" style="font-size:50px;">Covered</div>
                     <div class="ad3-bar"></div>
-                    <div class="ad3-body" style="font-size:10px;">Join AGC and your first <em>12 months</em> of specialist landlord insurance is included.</div>
+                    <div class="ad3-body" style="font-size:10px;"><em>Join</em> AGC and your first <em>12 months</em> of specialist landlord insurance is included.</div>
                 </div>
 
-                <div class="ad3-icons" style="bottom:50px;height:58px;">
-                    <div class="ad3-icon-item" style="font-size:7.5px;">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-                        12 Months<br>Insurance
-                    </div>
+                <!-- 3-icon strip -->
+                <div class="ad3-icons" style="bottom:50px;height:56px;">
                     <div class="ad3-icon-item" style="font-size:7.5px;">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.61a16 16 0 0 0 5.48 5.48l.94-1.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                         Speak<br>to Us
@@ -1456,23 +1615,21 @@
                         No Extra<br>Paperwork
                     </div>
                     <div class="ad3-icon-item" style="font-size:7.5px;">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
                         All Covered,<br>Simple
                     </div>
                 </div>
 
+                <!-- Navy footer -->
                 <div class="ad3-footer" style="height:50px;">
-                    <div class="ad3-footer-cta" style="font-size:10px;padding:7px 13px;">
+                    <div class="ad3-footer-cta" style="font-size:10px;padding:7px 14px;">
                         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.61a16 16 0 0 0 5.48 5.48l.94-1.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                         Speak to Us &nbsp;→
-                    </div>
-                    <div class="ad3-footer-phone" style="font-size:9px;">
-                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.61a16 16 0 0 0 5.48 5.48l.94-1.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        02 9413 1183
                     </div>
                 </div>
             </div>
 
+            <!-- Instagram bottom chrome -->
             <div class="ig-bottombar">
                 <div class="ig-actions">
                     <div class="ig-icon">♡</div>
@@ -1481,7 +1638,7 @@
                     <div class="ig-icon save">🔖</div>
                 </div>
                 <div class="ig-likes">Sponsored</div>
-                <div class="ig-caption"><strong>agc_realestate</strong> Thinking about joining AGC? Your first 12 months of specialist landlord insurance is included when you come on board. Inner Sydney specialists. T&Cs apply. Link in bio.</div>
+                <div class="ig-caption"><strong>agc_realestate</strong> Thinking about joining AGC? Your first 12 months of specialist landlord insurance is included when you come on board. Inner Sydney specialists. T&amp;Cs apply. Link in bio.</div>
             </div>
         </div>
     </div>
